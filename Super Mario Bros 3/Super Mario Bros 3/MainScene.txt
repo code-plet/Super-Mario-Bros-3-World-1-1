@@ -3,6 +3,7 @@
 0	textures\mario.png	255	255	255
 20	textures\misc.png	176	224	248
 10	textures\enemies.png	3	26	110
+30	textures\World1.png	255	255	255
 
 # id	left	top	right	bottom	texture_id
 [SPRITES]
@@ -50,6 +51,11 @@
 #die
 30003	45	21	61	29	10
 
+#Objects
+#Fisrt_Ground
+41001	0	416	624	432	30
+#Tall_Bushes
+42001	15	351	144	461	30
 #brick with question mark animation
 40001	300	117	316	133	20
 40002	318	117	334	133	20
@@ -90,20 +96,26 @@
 509	10019	100
 #die
 599	10099	100
+# ==== GOOMBA  =========
+# walk
+701	30001	100	30002	100
+# die
+702	30003	100
 
+# ==================Objects=============================#
+#=========Ground=====================
+#first_ground
+1000	41001	100
+
+#==============Bushes===================================#
+#First_Bush
+1100	42001	100	
 
 # ==== BRICK =========
 601	20001	100
 
 # ==== QUESTION MARK BRICK =========
 602	40001	1000	40001	100	40002	100	40003	100	40004	100
-
-
-# ==== GOOMBA  =========
-# walk
-701	30001	100	30002	100
-# die
-702	30003	100
 
 
 
@@ -119,18 +131,21 @@
 22	602
 # GOOMBA
 3	701	702
+# First Ground
+4	1000
+#first Bush
+5	1100	
 
 [OBJECTS]
 # type	x	y	ani_set_id	extra_settings per object type
-# type: 0 = Mario , 1 = Brick, 2 = Goomba
+# type: 0 = Mario , 1 = Brick, 2 = Goomba, 3 = Ground
 # MARIO
 0	60.0	80.0	1
-# BRICK
-1	50.0	120.0	2
-1	67.0	120.0	2
-1	84.0	120.0	2
-1	101.0	120.0	2
-1	118.0	120.0	2
+# Ground
+3	0.0	200.0	4
+#First_Bush
+
+
 
 
 # --- SCENE PORTAL ----

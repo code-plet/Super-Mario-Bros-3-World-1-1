@@ -8,6 +8,7 @@
 #include "Sprite.h"
 #include "Animation.h"
 #include "Brick.h"
+#include "Ground.h"
 
 #define MAX_GAME_LINE 1024
 
@@ -21,6 +22,7 @@
 #define OBJECT_TYPE_MARIO 0
 #define OBJECT_TYPE_BRICK 1
 #define OBJECT_TYPE_GOOMBA 2
+#define OBJECT_TYPE_GROUND 3
 
 
 PlayScene::PlayScene(int id, LPCWSTR FilePath): 
@@ -204,6 +206,9 @@ void PlayScene::ParseSectionObjects(string line) {
 		obj = new Brick();
 		break;
 	case OBJECT_TYPE_GOOMBA:
+		break;
+	case OBJECT_TYPE_GROUND:
+		obj = new Ground();
 		break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", type);
