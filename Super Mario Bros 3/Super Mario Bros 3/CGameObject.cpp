@@ -7,26 +7,29 @@ void CGameObject::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 
 	this->dt = dt;
 	vx += ax * dt;
+	vy += ay * dt;
+	dx = vx * dt;
+	dy = vy * dt;
 }
 
-LPCOLLISIONEVENT CGameObject::SweptAABBEx(LPGAMEOBJECT coObjs) {
-
+LPCOLLISIONEVENT CGameObject::SweptAABBEx(LPGAMEOBJECT coO)
+{
 	float sl, st, sr, sb;		// static object bbox
 	float ml, mt, mr, mb;		// moving object bbox
 	float t, nx, ny;
 
-	coObjs->GetBoundingBox(sl, st, sr, sb);
+	coO->GetBoundingBox(sl, st, sr, sb);
 
 	// deal with moving object: m speed = original m speed - collide object speed
 	float svx, svy;
-	coObjs->GetAccel(svx, svy);
+	coO->GetVelocity(svx, svy);
 
 	float sdx = svx * dt;
 	float sdy = svy * dt;
 
 	// (rdx, rdy) is RELATIVE movement distance/velocity 
-	float rdx = this->vx - sdx;
-	float rdy = this->vy - sdy;
+	float rdx = this->dx - sdx;
+	float rdy = this->dy - sdy;
 
 	GetBoundingBox(ml, mt, mr, mb);
 
@@ -37,10 +40,16 @@ LPCOLLISIONEVENT CGameObject::SweptAABBEx(LPGAMEOBJECT coObjs) {
 		t, nx, ny
 	);
 
-	CollisionEvent* e = new CollisionEvent(t, nx, ny, rdx, rdy, coObjs);
+	CollisionEvent* e = new CollisionEvent(t, nx, ny, rdx, rdy, coO);
 	return e;
 }
 
+/*
+	Calculate potential collisions with the list of colliable objects
+
+	coObjects: the list of colliable objects
+	coEvents: list of potential collisions
+*/
 void CGameObject::CalcPotentialCollisions(
 	vector<LPGAMEOBJECT>* coObjects,
 	vector<LPCOLLISIONEVENT>& coEvents)

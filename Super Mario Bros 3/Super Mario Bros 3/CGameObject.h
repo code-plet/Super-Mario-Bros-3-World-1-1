@@ -45,9 +45,11 @@ protected:
 
 	float x, y;      //Object's current location
 
-	float vx, vy;    //Object's immediate velocity 
+	float dx, dy;    //Object's immediate velocity
 
-	float ax, ay;    //Object's acceleration rate (per frame/dt)
+	float vx, vy;    //Object's current velocity 
+
+	float ax, ay;    //Object's acceleration rate 
 
 	int nx;         //Object's current direction
 

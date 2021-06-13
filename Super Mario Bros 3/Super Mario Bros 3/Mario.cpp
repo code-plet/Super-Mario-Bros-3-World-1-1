@@ -1,23 +1,22 @@
 #include "Mario.h"
 
-void Mario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
+vector<LPCOLLISIONEVENT> coEvents;
+vector<LPCOLLISIONEVENT> coEventsResult;
+
+void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 	CGameObject::Update(dt); // Uses ax,ay to calculate vx, vy 
 
-	if(y!= 100) vy += MARIO_GRAVITY;
-
-	vector<LPCOLLISIONEVENT> coEvents;
-	vector<LPCOLLISIONEVENT> coEventsResult;
+	ay = MARIO_GRAVITY;
 
 	coEvents.clear();
 
 	CalcPotentialCollisions(coObjects, coEvents);
 
-	if (coEvents.size()==0) {
+	if (coEvents.size() == 0) {
 
-		x += vx;
-		if (y > 100) { vy = 0; y = 100; }
-		else y += vy;
+		x += dx;
+		y += dy;
 	}
 	else {
 		float min_tx, min_ty, nx = 0, ny;
@@ -32,11 +31,12 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 		//	x += nx*abs(rdx); 
 
 		// block every object first!
-		x += min_tx * vx + nx*0.4f;
-		y += min_ty * vy + ny*0.4f;
+		x += min_tx * dx + nx * 0.4f;
+		y += min_ty * dy + ny * 0.4f;
 
-		if (nx != 0) ax = 0;
-		if (ny != 0) ay = 0;
+		if (nx != 0) { vx = 0;  }
+		if (ny != 0) { vy = 0;  }
+
 
 
 		//
@@ -46,57 +46,65 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
 
-			/*if (dynamic_cast<CGoomba*>(e->obj)) // if e->obj is Goomba 
-			{
-				CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
+			//	if (dynamic_cast<CGoomba*>(e->obj)) // if e->obj is Goomba 
+			//	{
+			//		CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
 
-				// jump on top >> kill Goomba and deflect a bit 
-				if (e->ny < 0)
-				{
-					if (goomba->GetState() != GOOMBA_STATE_DIE)
-					{
-						goomba->SetState(GOOMBA_STATE_DIE);
-						vy = -MARIO_JUMP_DEFLECT_SPEED;
-					}
-				}
-				else if (e->nx != 0)
-				{
-					if (untouchable == 0)
-					{
-						if (goomba->GetState() != GOOMBA_STATE_DIE)
-						{
-							if (level > MARIO_LEVEL_SMALL)
-							{
-								level = MARIO_LEVEL_SMALL;
-								StartUntouchable();
-							}
-							else
-								SetState(MARIO_STATE_DIE);
-						}
-					}
-				}
-			} // if Goomba
-			else if (dynamic_cast<CPortal*>(e->obj))
-			{
-				CPortal* p = dynamic_cast<CPortal*>(e->obj);
-				CGame::GetInstance()->SwitchScene(p->GetSceneId());
-			}*/
+			//		// jump on top >> kill Goomba and deflect a bit 
+			//		if (e->ny < 0)
+			//		{
+			//			if (goomba->GetState() != GOOMBA_STATE_DIE)
+			//			{
+			//				goomba->SetState(GOOMBA_STATE_DIE);
+			//				vy = -MARIO_JUMP_DEFLECT_SPEED;
+			//			}
+			//		}
+			//		else if (e->nx != 0)
+			//		{
+			//			if (untouchable == 0)
+			//			{
+			//				if (goomba->GetState() != GOOMBA_STATE_DIE)
+			//				{
+			//					if (level > MARIO_LEVEL_SMALL)
+			//					{
+			//						level = MARIO_LEVEL_SMALL;
+			//						StartUntouchable();
+			//					}
+			//					else
+			//						SetState(MARIO_STATE_DIE);
+			//				}
+			//			}
+			//		}
+			//	} // if Goomba
+			//	else if (dynamic_cast<CPortal*>(e->obj))
+			//	{
+			//		CPortal* p = dynamic_cast<CPortal*>(e->obj);
+			//		CGame::GetInstance()->SwitchScene(p->GetSceneId());
+			//	}
+			//}
+
 		}
 
+		for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+		// Implement collision Physic
+
+		/*CGameObject::Update(dt);
+		if (y != 100) ay = MARIO_GRAVITY;
+
+		x += dx;
+		y += dy;
+		if (y > 100) { y = 100; vy = 0; }*/
+
 	}
-
-
-
-
 }
 
 void Mario::Render() {
 
 	int ani = -1;
-	if (State == MARIO_STATE_DIVE) if (nx == 1) ani = MARIO_ANI_DIVE_RIGHT;
-	else ani = MARIO_ANI_DIVE_LEFT;
-	else if (vy != 0) if (nx == 1) ani = MARIO_ANI_JUMP_RIGHT;
+	if (vy < 0 || vy> 0.017 ) if (nx == 1) ani = MARIO_ANI_JUMP_RIGHT;
 	else ani = MARIO_ANI_JUMP_LEFT;
+	else if (State == MARIO_STATE_DIVE) if (nx == 1) ani = MARIO_ANI_DIVE_RIGHT;
+	else ani = MARIO_ANI_DIVE_LEFT;
 	else if (vx > 0) if (nx == -1) ani = MARIO_ANI_BRAKE_RIGHT;
 	else ani = MARIO_ANI_WALK_RIGHT; 
 	else if (vx < 0) if (nx == 1) ani = MARIO_ANI_BRAKE_LEFT;
@@ -161,12 +169,12 @@ void Mario::setState(int State){
 
 		if (vx > 0) {
 			ax = -MARIO_FISSION;
-			if (vx < MARIO_FISSION*1.5*dt) { vx = 0; ax = 0; }
-		}
-		if (vx < 0 ) {
+			if (vx < MARIO_FISSION * 1.5 * dt) { vx = 0; ax = 0; }
+		}			
+		if (vx < 0) {
 			ax = MARIO_FISSION;
-			if (vx > -MARIO_FISSION*1.5*dt) { vx = 0; ax = 0; }
-		
+			if (vx > -MARIO_FISSION * 1.5 * dt) { vx = 0; ax = 0; }
+
 		}
 		break;
 	case MARIO_STATE_DIVE:
@@ -178,7 +186,6 @@ void Mario::setState(int State){
 		if (vx < 0) {
 			ax = MARIO_FISSION;
 			if (vx > -MARIO_FISSION * 1.5 * dt) { vx = 0; ax = 0; }
-
 		}
 		break;
 	default:

@@ -124,9 +124,13 @@
 # type	x	y	ani_set_id	extra_settings per object type
 # type: 0 = Mario , 1 = Brick, 2 = Goomba
 # MARIO
-0	50.0	100.0	1
+0	60.0	80.0	1
 # BRICK
-1	100.0	100.0	2
+1	50.0	120.0	2
+1	67.0	120.0	2
+1	84.0	120.0	2
+1	101.0	120.0	2
+1	118.0	120.0	2
 
 
 # --- SCENE PORTAL ----
