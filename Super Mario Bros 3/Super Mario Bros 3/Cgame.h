@@ -60,6 +60,9 @@ public:
 	void Load(LPCWSTR gamefile);
 	LPSCENE GetCurrentScene();
 
+	int GetScreenHeight() { return this->screen_height; }
+	int GetScreenWidth() { return this->screen_width; }
+
 	static void SweptAABB(
 		float ml, float mt, float mr, float mb,
 		float dx, float dy,
@@ -74,6 +77,8 @@ public:
 	LPDIRECT3DDEVICE9 GetDirect3DDevice() { return this->d3ddv; }
 	LPDIRECT3DSURFACE9 GetBackBuffer() { return backBuffer; }
 	LPD3DXSPRITE GetSpriteHandler() { return this->spriteHandler; }
+
+	void SetcamPos(float x, float y) { cam_x = x; cam_y = y; }
 
 	static Cgame* GetInstance(); //Call the game object's pointer, if NULL create new game.
 

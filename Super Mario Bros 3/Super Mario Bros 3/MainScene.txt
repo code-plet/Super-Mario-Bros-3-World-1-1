@@ -51,16 +51,19 @@
 #die
 30003	45	21	61	29	10
 
-#Objects
-#Fisrt_Ground
-41001	0	416	624	432	30
-#Tall_Bushes
-42001	15	351	144	461	30
 #brick with question mark animation
 40001	300	117	316	133	20
 40002	318	117	334	133	20
 40003	336	117	352	133	20
 40004	355	117	370	133	20
+
+#===============Collidable obstacle========================
+#Fisrt_Ground
+41001	0	416	624	432	30
+
+#===============Decorative Object==========================
+#Tall_Bushes
+42001	15	351	144	416	30
 						
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
@@ -109,7 +112,7 @@
 
 #==============Bushes===================================#
 #First_Bush
-1100	42001	100	
+1100	42001	100
 
 # ==== BRICK =========
 601	20001	100
@@ -138,13 +141,13 @@
 
 [OBJECTS]
 # type	x	y	ani_set_id	extra_settings per object type
-# type: 0 = Mario , 1 = Brick, 2 = Goomba, 3 = Ground
+# type: 0 = Mario , 1 = Brick, 2 = Goomba, 3 = Collidable Obstacle: + Height +Width, 4 = Decorative Object
 # MARIO
 0	60.0	80.0	1
 # Ground
-3	0.0	200.0	4
+3	0.0	200.0	4	16	624
 #First_Bush
-
+4	16	135.0	5
 
 
 

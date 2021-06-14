@@ -8,7 +8,8 @@
 #include "Sprite.h"
 #include "Animation.h"
 #include "Brick.h"
-#include "Ground.h"
+#include "CollidableObstacle.h"
+#include "DecorativeObject.h"
 
 #define MAX_GAME_LINE 1024
 
@@ -22,7 +23,8 @@
 #define OBJECT_TYPE_MARIO 0
 #define OBJECT_TYPE_BRICK 1
 #define OBJECT_TYPE_GOOMBA 2
-#define OBJECT_TYPE_GROUND 3
+#define OBJECT_TYPE_CO_OBSTACLE 3
+#define OBJECT_TYPE_DECORATIVE_OBJECT 4
 
 
 PlayScene::PlayScene(int id, LPCWSTR FilePath): 
@@ -89,6 +91,17 @@ void PlayScene::Update(DWORD dt) {
 	for (int i = 1; i < GameObject.size(); i++) coObjects.push_back(GameObject[i]);  // List of colliable objects
 
 	for (int i = 0; i < GameObject.size(); i++) GameObject[i]->Update(dt,&coObjects); //Update object and detect collision.
+
+	if (Player == NULL) return;
+
+	float cx, cy;
+	Player->GetLocation(cx, cy);
+
+	Cgame* game = Cgame::GetInstance();
+	cx -= game->GetScreenWidth() / 2;
+	cy -= game->GetScreenHeight() / 2;
+
+	Cgame::GetInstance()->SetcamPos(cx, 0.0);
 
 }
 
@@ -202,13 +215,14 @@ void PlayScene::ParseSectionObjects(string line) {
 			Player =(Mario*) obj;
 		}
 		break;
-	case OBJECT_TYPE_BRICK:
-		obj = new Brick();
-		break;
 	case OBJECT_TYPE_GOOMBA:
 		break;
-	case OBJECT_TYPE_GROUND:
-		obj = new Ground();
+	case OBJECT_TYPE_CO_OBSTACLE:
+		obj = new CollidableObstacle();
+		obj->SetBoundingBox(atof(tokens[4].c_str()), atof(tokens[5].c_str()));
+		break;
+	case OBJECT_TYPE_DECORATIVE_OBJECT:
+		obj = new DecorativeObject();
 		break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", type);

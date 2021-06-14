@@ -55,6 +55,8 @@ protected:
 
 	int State;       //Object's state of actions
 
+	int Width, Height; //easier to get bounding box 
+
 	LPANIMATIONSET Animation_Set;
 
 	DWORD dt;
@@ -68,11 +70,14 @@ public:
 	void setAccel(float ax, float ay) { this->ax = ax; this->ay = ay; }
 
 	int GetState() { return State; }
+	void GetLocation(float& x, float& y) { x = this->x; y = this->y; }
     float GetVelocity_x() { return this->vx; }
 	void GetVelocity(float& vx, float& vy) { vx = this->vx; vy = this->vy; }
 	void GetAccel(float& ax, float& ay) { ax = this->ax; vy = this->ay; }
 
+	virtual void SetBoundingBox(int height, int width) { this->Width = width; this->Height = height; }
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) = 0;
+
 	virtual void Update(DWORD dt,vector <LPGAMEOBJECT> *coObjects = NULL);
 	virtual void Render()=0;
 

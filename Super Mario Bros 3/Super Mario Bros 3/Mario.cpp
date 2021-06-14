@@ -136,7 +136,7 @@ void Mario::setState(int State){
 	{
 	case MARIO_STATE_JUMP:
 
-		if (vy == 0) vy = -MARIO_JUMP_SPEED;
+ 		if (vy >= 0 && vy< 0.017) vy = -MARIO_JUMP_SPEED;
 		break;
 
 	case MARIO_STATE_WALK_RIGHT:
@@ -194,6 +194,4 @@ void Mario::setState(int State){
 	}
 
 	CGameObject::setState(State);
-
 }
-
