@@ -149,9 +149,11 @@
     <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CollidableObstacle.cpp" />
     <ClCompile Include="DecorativeObject.cpp" />
+    <ClCompile Include="Goomba.cpp" />
     <ClCompile Include="KeyEventHandler.cpp" />
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="QuestionMarkBrick.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -164,9 +166,11 @@
     <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CollidableObstacle.h" />
     <ClInclude Include="DecorativeObject.h" />
+    <ClInclude Include="Goomba.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Mario.h" />
     <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="QuestionMarkBrick.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />

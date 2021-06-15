@@ -5,13 +5,25 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="World Objects Resources">
+      <UniqueIdentifier>{020a8370-56fe-4893-b25b-cfca1d490b23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Headers Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="World Objects Headers Files">
+      <UniqueIdentifier>{24e8fb02-ef7f-4f25-ab59-e109d6354b48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Objects Headers Files\Mobs headers Files">
+      <UniqueIdentifier>{1a0d7879-83e3-480d-b388-334d6db2b271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Objects Resources\Mobs Resources">
+      <UniqueIdentifier>{bdf90fc3-45ff-4ff1-be4a-64cb6f98f37f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -22,9 +34,6 @@
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="Utils.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CGameObject.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
@@ -48,49 +57,64 @@
     <ClCompile Include="PlayScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QuestionMarkBrick.cpp">
+      <Filter>World Objects Resources</Filter>
+    </ClCompile>
     <ClCompile Include="CollidableObstacle.cpp">
-      <Filter>Resource Files</Filter>
+      <Filter>World Objects Resources</Filter>
     </ClCompile>
     <ClCompile Include="DecorativeObject.cpp">
-      <Filter>Resource Files</Filter>
+      <Filter>World Objects Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameObject.cpp">
+      <Filter>World Objects Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Goomba.cpp">
+      <Filter>World Objects Resources\Mobs Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cgame.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="KeyEventHandler.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CGameObject.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="Mario.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayScene.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Headers Files</Filter>
     </ClInclude>
-    <ClInclude Include="CollidableObstacle.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="CGameObject.h">
+      <Filter>World Objects Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="DecorativeObject.h">
-      <Filter>Header Files</Filter>
+      <Filter>World Objects Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollidableObstacle.h">
+      <Filter>World Objects Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QuestionMarkBrick.h">
+      <Filter>World Objects Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Goomba.h">
+      <Filter>World Objects Headers Files\Mobs headers Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

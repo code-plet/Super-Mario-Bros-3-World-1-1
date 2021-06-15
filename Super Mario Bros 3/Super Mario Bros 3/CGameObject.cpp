@@ -3,6 +3,13 @@
 #include "CGameObject.h"
 #include "Texture.h"
 
+CGameObject::CGameObject() {
+
+	x = y = 0;
+	vy = vx = 0;
+	nx = 1;
+}
+
 void CGameObject::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects) {
 
 	this->dt = dt;

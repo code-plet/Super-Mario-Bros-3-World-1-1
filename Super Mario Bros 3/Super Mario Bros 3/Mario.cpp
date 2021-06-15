@@ -17,6 +17,7 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 		x += dx;
 		y += dy;
+		if (x < 10) x = 10;
 	}
 	else {
 		float min_tx, min_ty, nx = 0, ny;
@@ -32,6 +33,8 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 		// block every object first!
 		x += min_tx * dx + nx * 0.4f;
+		if (x < 10) x = 10;
+
 		y += min_ty * dy + ny * 0.4f;
 
 		if (nx != 0) { vx = 0;  }
@@ -156,13 +159,13 @@ void Mario::setState(int State){
 	case MARIO_STATE_BREAK_RIGHT:
 
 		nx = 1;
-		ax = MARIO_FISSION * 2;
+		ax = MARIO_FISSION * 2.2;
 		break;
 
 	case MARIO_STATE_BREAK_LEFT:
 
 		nx = -1;
-		ax = -MARIO_FISSION * 2;
+		ax = -MARIO_FISSION * 2.2;
 		break;
 
 	case MARIO_STATE_IDLE:

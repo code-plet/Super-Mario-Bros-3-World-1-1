@@ -7,7 +7,7 @@
 
 # id	left	top	right	bottom	texture_id
 [SPRITES]
-# BIG MARIO 
+# ====BIG MARIO ======
 # idle right
 10001	246	154	260	181	0
 # walk
@@ -32,7 +32,7 @@
 10019	5	229	20	257	0
 # die 
 10099	215	120	231	135	0
-# SMALL MARIO
+# ===SMALL MARIO====
 # idle small right
 10021	247	0	259	15	0
 # walk
@@ -43,20 +43,22 @@
 # walk
 10032	155	0	170	15	0
 10033	125	0	139	15	0
-#BRICK
+#==========BRICK===========
 20001	408	225	424	241	20
-#GOOMBA
+#========GOOMBA==========
 30001	5	14	21	29	10
 30002	25	14	41	29	10
 #die
 30003	45	21	61	29	10
 
-#brick with question mark animation
-40001	300	117	316	133	20
-40002	318	117	334	133	20
-40003	336	117	352	133	20
-40004	355	117	370	133	20
-
+#====brick with question mark animation====
+#Active
+40001	299	116	316	133	20
+40002	317	116	334	133	20
+40003	335	116	352	133	20
+40004	354	116	370	133	20
+#Empty
+40005	371	116	388	133	20
 #===============Collidable obstacle========================
 #Fisrt_Ground
 41001	0	416	624	432	30
@@ -105,21 +107,23 @@
 # die
 702	30003	100
 
-# ==================Objects=============================#
-#=========Ground=====================
-#first_ground
-1000	41001	100
-
-#==============Bushes===================================#
-#First_Bush
-1100	42001	100
-
 # ==== BRICK =========
 601	20001	100
 
 # ==== QUESTION MARK BRICK =========
-602	40001	1000	40001	100	40002	100	40003	100	40004	100
+602	40001	1000	40001	100	40002	100	40003	100	40004	100	40005	100
 
+
+
+# ==================Collidable Objects=============================#
+#=========Ground=====================
+#first_ground
+1000	41001	100
+
+#===============Decorative Objects==============#
+#==============Bushes====================
+#First_Bush
+1100	42001	100
 
 
 #
@@ -141,13 +145,15 @@
 
 [OBJECTS]
 # type	x	y	ani_set_id	extra_settings per object type
-# type: 0 = Mario , 1 = Brick, 2 = Goomba, 3 = Collidable Obstacle: + Height +Width, 4 = Decorative Object
+# type: 0 = Mario; 1 = Brick; 2 = Goomba; 3 = Question Mark Brick; 98 = Collidable Obstacle: + Height +Width; 99 = Decorative Object;
 # MARIO
 0	60.0	80.0	1
+#Question Mark Brick
+3	176.0	151.0	22	
 # Ground
-3	0.0	200.0	4	16	624
+98	0.0	200.0	4	16	624
 #First_Bush
-4	16	135.0	5
+99	16	135.0	5
 
 
 
