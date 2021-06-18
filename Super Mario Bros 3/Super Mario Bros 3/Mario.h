@@ -5,6 +5,7 @@
 #define MARIO_WALKING_SPEED    0.15f
 #define MARIO_GRAVITY          0.001f
 #define MARIO_FISSION          0.0002f
+#define MARIO_JUMP_DEFLECT_SPEED 0.2f
 
 #define MARIO_STATE_IDLE        100
 #define MARIO_STATE_JUMP        101
@@ -35,8 +36,10 @@ class Mario :
 {
 public:
 
+    Mario() { nx = 1; }
     void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects);
     void Render();
+    void Reset() { this->x = 160; this->y = 155; }
 
     void setState(int State);
 

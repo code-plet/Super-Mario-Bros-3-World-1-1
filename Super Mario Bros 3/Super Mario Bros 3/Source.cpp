@@ -10,6 +10,7 @@
 #define MAIN_WINDOW_TITLE L"SMBros World 1-1"
 
 #define BACKGROUND_COLOR D3DCOLOR_XRGB(156, 252, 240)
+//(0, 0, 0) black; (156, 252, 240) skyblue
 #define SCREEN_WIDTH 384
 #define SCREEN_HEIGHT 288
 

@@ -1,4 +1,6 @@
 #include "Mario.h"
+#include "Goomba.h"
+#include "QuestionMarkBrick.h"
 
 vector<LPCOLLISIONEVENT> coEvents;
 vector<LPCOLLISIONEVENT> coEventsResult;
@@ -37,8 +39,8 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 		y += min_ty * dy + ny * 0.4f;
 
-		if (nx != 0) { vx = 0;  }
-		if (ny != 0) { vy = 0;  }
+		if (nx != 0) { vx = 0; }
+		if (ny != 0) { vy = 0; }
 
 
 
@@ -49,55 +51,43 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
 
-			//	if (dynamic_cast<CGoomba*>(e->obj)) // if e->obj is Goomba 
-			//	{
-			//		CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
+			if (dynamic_cast<Goomba*>(e->obj)) // if e->obj is Goomba 
+			{
+				Goomba* goomba = dynamic_cast<Goomba*>(e->obj);
 
-			//		// jump on top >> kill Goomba and deflect a bit 
-			//		if (e->ny < 0)
-			//		{
-			//			if (goomba->GetState() != GOOMBA_STATE_DIE)
-			//			{
-			//				goomba->SetState(GOOMBA_STATE_DIE);
-			//				vy = -MARIO_JUMP_DEFLECT_SPEED;
-			//			}
-			//		}
-			//		else if (e->nx != 0)
-			//		{
-			//			if (untouchable == 0)
-			//			{
-			//				if (goomba->GetState() != GOOMBA_STATE_DIE)
-			//				{
-			//					if (level > MARIO_LEVEL_SMALL)
-			//					{
-			//						level = MARIO_LEVEL_SMALL;
-			//						StartUntouchable();
-			//					}
-			//					else
-			//						SetState(MARIO_STATE_DIE);
-			//				}
-			//			}
-			//		}
-			//	} // if Goomba
-			//	else if (dynamic_cast<CPortal*>(e->obj))
-			//	{
-			//		CPortal* p = dynamic_cast<CPortal*>(e->obj);
-			//		CGame::GetInstance()->SwitchScene(p->GetSceneId());
-			//	}
-			//}
+				// jump on top >> kill Goomba and deflect a bit 
+				if (e->ny < 0)
+				{
+					if (goomba->GetState() != GOOMBA_STATE_DIE)
+					{
+						goomba->SetState(GOOMBA_STATE_DIE);
+						vy = -MARIO_JUMP_DEFLECT_SPEED;
+					}
+				}
+				else if (e->nx != 0)
+				{
+					Reset();
+				}
+			}
+			else if (dynamic_cast<QuestionMarkBrick*>(e->obj)) {
+
+				QuestionMarkBrick* QMB = dynamic_cast<QuestionMarkBrick*>(e->obj);
+				if (e->ny > 0 && QMB->GetState() == QUESTION_MARK_STATE_ACTIVE) {
+						QMB->setState(QUESTION_MARK_STATE_EMPTY);
+				}
+			}
+
+			for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+			// Implement collision Physic
+
+			/*CGameObject::Update(dt);
+			if (y != 100) ay = MARIO_GRAVITY;
+
+			x += dx;
+			y += dy;
+			if (y > 100) { y = 100; vy = 0; }*/
 
 		}
-
-		for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
-		// Implement collision Physic
-
-		/*CGameObject::Update(dt);
-		if (y != 100) ay = MARIO_GRAVITY;
-
-		x += dx;
-		y += dy;
-		if (y > 100) { y = 100; vy = 0; }*/
-
 	}
 }
 

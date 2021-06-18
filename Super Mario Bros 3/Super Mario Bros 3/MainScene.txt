@@ -4,6 +4,7 @@
 20	textures\misc.png	176	224	248
 10	textures\enemies.png	3	26	110
 30	textures\World1.png	255	255	255
+-100	textures\bbox.png	255	255	255
 
 # id	left	top	right	bottom	texture_id
 [SPRITES]
@@ -53,12 +54,12 @@
 
 #====brick with question mark animation====
 #Active
-40001	299	116	316	133	20
-40002	317	116	334	133	20
-40003	335	116	352	133	20
-40004	354	116	370	133	20
+40001	300	117	316	133	20
+40002	318	117	334	133	20
+40003	336	117	352	133	20
+40004	354	117	370	133	20
 #Empty
-40005	371	116	388	133	20
+40005	372	117	388	133	20
 #===============Collidable obstacle========================
 #Fisrt_Ground
 41001	0	416	624	432	30
@@ -111,8 +112,10 @@
 601	20001	100
 
 # ==== QUESTION MARK BRICK =========
-602	40001	1000	40001	100	40002	100	40003	100	40004	100	40005	100
-
+#Active
+602	40001	100	40002	100	40003	100	40004	100
+#Empty
+603	40005	100
 
 
 # ==================Collidable Objects=============================#
@@ -135,7 +138,7 @@
 # BRICK 
 2	601
 # QUESTION MARK BRICK 
-22	602
+22	602	603
 # GOOMBA
 3	701	702
 # First Ground
@@ -147,14 +150,20 @@
 # type	x	y	ani_set_id	extra_settings per object type
 # type: 0 = Mario; 1 = Brick; 2 = Goomba; 3 = Question Mark Brick; 98 = Collidable Obstacle: + Height +Width; 99 = Decorative Object;
 # MARIO
-0	60.0	80.0	1
-#Question Mark Brick
-3	176.0	151.0	22	
+0	60.0	155.0	1
+#==========GOOMBAS========================#
+2	160.0	155.0	3
+#=========================================#
+#============Question Mark Bricks===============#
+3	160.0	130.0	22	16	16
+3	176.0	130.0	22	16	16
+3	210.0	84.0	22	16	16
+3	226.0	84.0	22	16	16
+#===============================================#
 # Ground
 98	0.0	200.0	4	16	624
 #First_Bush
-99	16	135.0	5
-
+#99	16	135.0	5
 
 
 # --- SCENE PORTAL ----

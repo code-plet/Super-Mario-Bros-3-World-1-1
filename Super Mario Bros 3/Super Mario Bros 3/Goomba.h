@@ -2,6 +2,7 @@
 #include "CGameObject.h"
 
 #define GOOMBA_WALKING_SPEED 0.05f
+#define GOOMBA_GRAVITY 0.001f
 
 #define GOOMBA_STATE_ALIVE 10
 #define GOOMBA_STATE_DIE   11
@@ -16,6 +17,7 @@
 class Goomba :
     public CGameObject
 {
+public:
     Goomba();
     void Update(DWORD dt, vector <LPGAMEOBJECT>* coObjects = NULL);
     void Render();

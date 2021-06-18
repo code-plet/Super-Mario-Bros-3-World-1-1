@@ -10,6 +10,8 @@
 #include "Brick.h"
 #include "CollidableObstacle.h"
 #include "DecorativeObject.h"
+#include "Goomba.h"
+#include "QuestionMarkBrick.h"
 
 #define MAX_GAME_LINE 1024
 
@@ -23,8 +25,9 @@
 #define OBJECT_TYPE_MARIO 0
 #define OBJECT_TYPE_BRICK 1
 #define OBJECT_TYPE_GOOMBA 2
-#define OBJECT_TYPE_CO_OBSTACLE 3
-#define OBJECT_TYPE_DECORATIVE_OBJECT 4
+#define OBJECT_TYPE_QUESTION_MARK_BRICK 3
+#define OBJECT_TYPE_CO_OBSTACLE 98
+#define OBJECT_TYPE_DECORATIVE_OBJECT 99
 
 
 PlayScene::PlayScene(int id, LPCWSTR FilePath): 
@@ -120,7 +123,9 @@ void PlayScene::Unload() {
 void PlayScene::Render() {
 	
 
-	for (int i = 0; i < GameObject.size(); i++) GameObject[i]->Render();
+	for (int i = 0; i < GameObject.size(); i++) {
+		GameObject[i]->Render(); GameObject[i]->RenderBoundingBox();
+	}
 
 }
 
@@ -216,6 +221,7 @@ void PlayScene::ParseSectionObjects(string line) {
 		}
 		break;
 	case OBJECT_TYPE_GOOMBA:
+		obj = new Goomba();
 		break;
 	case OBJECT_TYPE_CO_OBSTACLE:
 		obj = new CollidableObstacle();
@@ -224,13 +230,16 @@ void PlayScene::ParseSectionObjects(string line) {
 	case OBJECT_TYPE_DECORATIVE_OBJECT:
 		obj = new DecorativeObject();
 		break;
+	case OBJECT_TYPE_QUESTION_MARK_BRICK:
+		obj = new QuestionMarkBrick();
+		obj->SetBoundingBox(atof(tokens[4].c_str()), atof(tokens[5].c_str()));
+		break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", type);
 		return;
 	}
 
 	obj->setLocation(atof(tokens[1].c_str()), atof(tokens[2].c_str()));
-	obj->setVelocity(0, 0);
 	obj->setAnimationSet(AnimationSets::GetInstance()->GetSet(atoi(tokens[3].c_str())));
 	GameObject.push_back(obj);
 
