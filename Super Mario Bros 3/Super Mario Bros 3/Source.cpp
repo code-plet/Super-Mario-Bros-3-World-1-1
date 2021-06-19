@@ -11,8 +11,8 @@
 
 #define BACKGROUND_COLOR D3DCOLOR_XRGB(156, 252, 240)
 //(0, 0, 0) black; (156, 252, 240) skyblue
-#define SCREEN_WIDTH 384
-#define SCREEN_HEIGHT 288
+#define SCREEN_WIDTH 576 //384
+#define SCREEN_HEIGHT 432 //288
 
 #define MAX_FRAME_RATE 120
 

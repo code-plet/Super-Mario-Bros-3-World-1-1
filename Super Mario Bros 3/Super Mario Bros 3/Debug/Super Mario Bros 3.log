@@ -1,2 +1,17 @@
-﻿  Cgame.cpp
+﻿  PlayScene.cpp
+  D:\important files\game dev\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\Cgame.h(8,1): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+D:\important files\game dev\Include\dinput.h(42): message : see previous definition of 'DIRECTINPUT_VERSION'
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(94,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(96,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(113,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(126,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(172,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(191,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(228,52): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(228,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(235,52): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(235,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(242,48): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(242,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Super Mario Bros 3.vcxproj -> C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Debug\Super Mario Bros 3.exe
