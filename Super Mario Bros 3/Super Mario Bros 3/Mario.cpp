@@ -1,6 +1,7 @@
 #include "Mario.h"
 #include "Goomba.h"
 #include "QuestionMarkBrick.h"
+#include "CollidableObstacle.h"
 
 vector<LPCOLLISIONEVENT> coEvents;
 vector<LPCOLLISIONEVENT> coEventsResult;
@@ -34,13 +35,13 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		//	x += nx*abs(rdx); 
 
 		// block every object first!
-		x += min_tx * dx + nx * 0.4f;
+		/*x += min_tx * dx + nx * 0.4f;
 		if (x < 10) x = 10;
 
 		y += min_ty * dy + ny * 0.4f;
 
 		if (nx != 0) { vx = 0; }
-		if (ny != 0) { vy = 0; }
+		if (ny != 0) { vy = 0; }*/
 
 
 
@@ -71,24 +72,43 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 			}
 			else if (dynamic_cast<QuestionMarkBrick*>(e->obj)) {
 
+				x += min_tx * dx + nx * 0.4f;
+				if (x < 10) x = 10;
+
+				y += min_ty * dy + ny * 0.4f;
+
+				if (nx != 0) { vx = 0; }
+				if (ny != 0) { vy = 0; }
+
 				QuestionMarkBrick* QMB = dynamic_cast<QuestionMarkBrick*>(e->obj);
 				if (e->ny > 0 && QMB->GetState() == QUESTION_MARK_STATE_ACTIVE) {
 						QMB->setState(QUESTION_MARK_STATE_EMPTY);
 				}
 			}
+			else if (dynamic_cast<CollidableObstacle*>(e->obj)) {
+				CollidableObstacle* CoObs = dynamic_cast<CollidableObstacle*>(e->obj);
+				if (CoObs->GetTopOnly() && ( e->ny > 0 || e->nx!=0) ) {
+					if (e->ny > 0) y += dy;
+					if (e->nx != 0) { 
+						x += dx; 
+						if (x < 10) x = 10; 
+					}
+				}
+				else {
+					x += min_tx * dx + nx * 0.4f;
+					if (x < 10) x = 10;
 
-			for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
-			// Implement collision Physic
+					y += min_ty * dy + ny * 0.4f;
 
-			/*CGameObject::Update(dt);
-			if (y != 100) ay = MARIO_GRAVITY;
-
-			x += dx;
-			y += dy;
-			if (y > 100) { y = 100; vy = 0; }*/
+					if (nx != 0) { vx = 0; }
+					if (ny != 0) { vy = 0; }
+				}
+			}
 
 		}
 	}
+
+	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 }
 
 void Mario::Render() {
@@ -149,13 +169,13 @@ void Mario::setState(int State){
 	case MARIO_STATE_BREAK_RIGHT:
 
 		nx = 1;
-		ax = MARIO_FISSION * 2.2;
+		ax = MARIO_FISSION * 2.4;
 		break;
 
 	case MARIO_STATE_BREAK_LEFT:
 
 		nx = -1;
-		ax = -MARIO_FISSION * 2.2;
+		ax = -MARIO_FISSION * 2.4;
 		break;
 
 	case MARIO_STATE_IDLE:

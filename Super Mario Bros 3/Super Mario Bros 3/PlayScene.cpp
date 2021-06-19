@@ -224,7 +224,7 @@ void PlayScene::ParseSectionObjects(string line) {
 		obj = new Goomba();
 		break;
 	case OBJECT_TYPE_CO_OBSTACLE:
-		obj = new CollidableObstacle();
+		obj = new CollidableObstacle(atof(tokens[6].c_str()));
 		obj->SetBoundingBox(atof(tokens[4].c_str()), atof(tokens[5].c_str()));
 		break;
 	case OBJECT_TYPE_DECORATIVE_OBJECT:

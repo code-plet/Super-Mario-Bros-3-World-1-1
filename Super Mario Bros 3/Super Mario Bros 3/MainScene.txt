@@ -61,8 +61,26 @@
 #Empty
 40005	372	117	388	133	20
 #===============Collidable obstacle========================
-#Fisrt_Ground
+#Fisrt Ground
 41001	0	416	624	432	30
+#second Ground
+41002	624	400	1088	432	30
+#First Tunnel
+41102	352	368	383	416	30
+#=First Moutain Block Group=#
+#first block
+41203	240	368	288	416	30
+#second block
+41204	272	336	328	416	30
+#=Second Moutain Block Group=#
+#First block
+41205	400	368	480	416	30
+#Second block
+41206	464	336	528	416	30
+#Third Block
+41207	512	304	582	416	30
+#Fourth block
+41208	512	384	608	416	30
 
 #===============Decorative Object==========================
 #Tall_Bushes
@@ -119,14 +137,26 @@
 
 
 # ==================Collidable Objects=============================#
-#=========Ground=====================
+#=========Grounds=====================
 #first_ground
 1000	41001	100
-
+1001	41002	100
+#===========Tunnels===================
+1100	41102	100
+#=====Moutain Block Groups===============#
+#first
+1200	41203	100
+1201	41204	100
+#second
+1202	41205	100
+1203	41206	100
+1204	41207	100
+1205	41208	100
 #===============Decorative Objects==============#
+
 #==============Bushes====================
 #First_Bush
-1100	42001	100
+2100	42001	100
 
 
 #
@@ -138,30 +168,66 @@
 # BRICK 
 2	601
 # QUESTION MARK BRICK 
-22	602	603
+0	602	603
 # GOOMBA
 3	701	702
 # First Ground
 4	1000
 #first Bush
-5	1100	
+5	2100
+#first Tunnel
+6	1100
+#===First Moutain Block Group=====#
+#First Block
+7	1200
+#second Block
+8	1201
+#===Second Moutain Block Group=====#
+9	1202
+10	1203
+11	1204
+12	1205
+#second Ground
+13	1001
 
 [OBJECTS]
+#[Object's index is counted starting from start to the end of the map]
 # type	x	y	ani_set_id	extra_settings per object type
 # type: 0 = Mario; 1 = Brick; 2 = Goomba; 3 = Question Mark Brick; 98 = Collidable Obstacle: + Height +Width; 99 = Decorative Object;
 # MARIO
 0	60.0	155.0	1
 #==========GOOMBAS========================#
-2	160.0	155.0	3
-#=========================================#
+#=====Area 1=======#
+2	160.0	65.0	3
 #============Question Mark Bricks===============#
-3	160.0	130.0	22	16	16
-3	176.0	130.0	22	16	16
-3	210.0	84.0	22	16	16
-3	226.0	84.0	22	16	16
-#===============================================#
-# Ground
-98	0.0	200.0	4	16	624
+#=====Area 1=======#
+3	160.0	130.0	0	16	16	0
+3	176.0	130.0	0	16	16	0
+3	210.0	82.0	0	16	16	0
+3	226.0	82.0	0	16	16	0
+#=====area 2=======#
+3	656.0	134.0	0	16	16	0
+3	704.0	136.0	0	16	16	0
+#================Grounds=======================#
+#first
+98	0.0	200.0	4	16	624	0
+#second
+98	624	184.0	13	32	464	0
+#================Tunnels=======================#
+#=====Area 1=======#
+98	355.0	152.0	6	48	31	0
+#================Moutain Block Groups==========#
+#=====Area 1=======#
+#=first Group=
+98	230.0	152.0	7	48	48	1
+98	262.0	120.0	8	80	48	1
+#=Second Group=
+98	402.0	152.0	9	48	80	1
+98	466.0	120.0	10	80	48	1
+98	514.0	88.0	11	112	64	1
+98	514.0	168.0	12	32	96	1
+
+#============Decorative Objects================#
 #First_Bush
 #99	16	135.0	5
 
