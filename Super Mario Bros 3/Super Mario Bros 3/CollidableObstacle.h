@@ -12,7 +12,6 @@ public:
 
     CollidableObstacle() {}
     CollidableObstacle(bool top_only) { this->TopOnly = top_only; }
-
     bool GetTopOnly() { return TopOnly; }
 
     virtual void Render();

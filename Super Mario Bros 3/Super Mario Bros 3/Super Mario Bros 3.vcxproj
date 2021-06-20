@@ -145,6 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="BreakableBrick.cpp" />
     <ClCompile Include="Cgame.cpp" />
     <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CollidableObstacle.cpp" />
@@ -158,11 +159,11 @@
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="TopOnlyCollidableObstacle.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="BreakableBrick.h" />
     <ClInclude Include="Cgame.h" />
     <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CollidableObstacle.h" />
@@ -175,7 +176,6 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="TopOnlyCollidableObstacle.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

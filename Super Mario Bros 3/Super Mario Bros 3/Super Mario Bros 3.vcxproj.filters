@@ -72,7 +72,7 @@
     <ClCompile Include="Goomba.cpp">
       <Filter>World Objects Resources\Mobs Resources</Filter>
     </ClCompile>
-    <ClCompile Include="TopOnlyCollidableObstacle.cpp">
+    <ClCompile Include="BreakableBrick.cpp">
       <Filter>World Objects Resources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -119,7 +119,7 @@
     <ClInclude Include="Goomba.h">
       <Filter>World Objects Headers Files\Mobs headers Files</Filter>
     </ClInclude>
-    <ClInclude Include="TopOnlyCollidableObstacle.h">
+    <ClInclude Include="BreakableBrick.h">
       <Filter>World Objects Headers Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,6 +12,7 @@
 #include "DecorativeObject.h"
 #include "Goomba.h"
 #include "QuestionMarkBrick.h"
+#include "BreakableBrick.h"
 
 #define MAX_GAME_LINE 1024
 
@@ -23,11 +24,13 @@
 #define GAME_FILE_SECTION_OBJECTS 4
 
 #define OBJECT_TYPE_MARIO 0
-#define OBJECT_TYPE_BRICK 1
+#define OBJECT_TYPE_BREAKABLE_BRICK 1
 #define OBJECT_TYPE_GOOMBA 2
 #define OBJECT_TYPE_QUESTION_MARK_BRICK 3
 #define OBJECT_TYPE_CO_OBSTACLE 98
 #define OBJECT_TYPE_DECORATIVE_OBJECT 99
+
+#define OBJECT_STATE_DIE 66
 
 
 PlayScene::PlayScene(int id, LPCWSTR FilePath): 
@@ -91,6 +94,9 @@ void PlayScene::Update(DWORD dt) {
 
 	vector<LPGAMEOBJECT> coObjects;
 
+	for (int i = 1; i < GameObject.size(); i++) {
+		if (GameObject[i]->GetState() == OBJECT_STATE_DIE) GameObject.erase(GameObject.begin() + i);
+	}
 	for (int i = 1; i < GameObject.size(); i++) coObjects.push_back(GameObject[i]);  // List of colliable objects
 
 	for (int i = 0; i < GameObject.size(); i++) GameObject[i]->Update(dt,&coObjects); //Update object and detect collision.
@@ -219,6 +225,10 @@ void PlayScene::ParseSectionObjects(string line) {
 			obj = new Mario();
 			Player =(Mario*) obj;
 		}
+		break;
+	case OBJECT_TYPE_BREAKABLE_BRICK:
+		obj = new BreakableBrick();
+		obj->SetBoundingBox(atof(tokens[4].c_str()), atof(tokens[5].c_str()));
 		break;
 	case OBJECT_TYPE_GOOMBA:
 		obj = new Goomba();

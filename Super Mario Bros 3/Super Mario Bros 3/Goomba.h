@@ -5,7 +5,7 @@
 #define GOOMBA_GRAVITY 0.001f
 
 #define GOOMBA_STATE_ALIVE 10
-#define GOOMBA_STATE_DIE   11
+#define GOOMBA_STATE_DIE   66
 
 #define GOOMBA_ANI_ALIVE   0
 #define GOOMBA_ANI_DIE     1
