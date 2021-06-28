@@ -66,8 +66,8 @@ void Cgame::Init(HWND hWnd)
 void Cgame::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha) {
 
 	if (cam_x < 0) cam_x = 0;
-	if (cam_x > 2250) cam_x = 2250;
-	D3DXVECTOR3 p(x - cam_x, y - cam_y+80, 0);
+	if (cam_x > 2430) cam_x = 2430;
+	D3DXVECTOR3 p(x - cam_x, y - cam_y, 0);
 	RECT r;
 	r.left = left;
 	r.top = top;

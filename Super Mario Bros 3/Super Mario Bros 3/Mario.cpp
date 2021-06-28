@@ -2,6 +2,7 @@
 #include "Goomba.h"
 #include "QuestionMarkBrick.h"
 #include "CollidableObstacle.h"
+#include "BreakableBrick.h"
 
 vector<LPCOLLISIONEVENT> coEvents;
 vector<LPCOLLISIONEVENT> coEventsResult;
@@ -70,8 +71,22 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 					Reset();
 				}
 			}
-			else if (dynamic_cast<QuestionMarkBrick*>(e->obj)) {
+	 		else if (dynamic_cast<QuestionMarkBrick*>(e->obj)) {
 
+				x += min_tx * dx + nx * 0.4f;
+				if (x < 10) x = 10;
+				if (nx != 0) vx = 0;
+				y += min_ty * dy + ny * 0.4f;
+				if (ny != 0) {  vy = 0; }
+				//If collides beneath the brick, give item.
+				QuestionMarkBrick* QMB = dynamic_cast<QuestionMarkBrick*>(e->obj);
+				if (e->ny > 0 && QMB->GetState() == QUESTION_MARK_STATE_ACTIVE) {
+						QMB->setState(QUESTION_MARK_STATE_EMPTY);
+				}
+			}
+			else if (dynamic_cast<BreakableBrick*>(e->obj)) {
+				BreakableBrick* CoObs = dynamic_cast<BreakableBrick*>(e->obj);
+				if (e->ny > 0) CoObs->setState(BRICK_STATE_BROKEN);
 				x += min_tx * dx + nx * 0.4f;
 				if (x < 10) x = 10;
 
@@ -79,21 +94,6 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 				if (nx != 0) { vx = 0; }
 				if (ny != 0) { vy = 0; }
-
-				QuestionMarkBrick* QMB = dynamic_cast<QuestionMarkBrick*>(e->obj);
-				if (e->ny > 0 && QMB->GetState() == QUESTION_MARK_STATE_ACTIVE) {
-						QMB->setState(QUESTION_MARK_STATE_EMPTY);
-				}
-			}
-			else if (dynamic_cast<CollidableObstacle*>(e->obj)) {
-				CollidableObstacle* CoObs = dynamic_cast<CollidableObstacle*>(e->obj);
-				if (CoObs->GetTopOnly() && ( e->ny > 0 || e->nx!=0) ) {
-					if (e->ny > 0) y += dy;
-					if (e->nx != 0) { 
-						x += dx; 
-						if (x < 10) x = 10; 
-					}
-				}
 				else {
 					x += min_tx * dx + nx * 0.4f;
 					if (x < 10) x = 10;
@@ -104,7 +104,31 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 					if (ny != 0) { vy = 0; }
 				}
 			}
+			else if (dynamic_cast<CollidableObstacle*>(e->obj)) {
+				CollidableObstacle* CoObs = dynamic_cast<CollidableObstacle*>(e->obj);
+				if (CoObs->GetTopOnly() && ( e->ny > 0 || e->nx!=0) ) {
+						if (e->ny > 0) {
+						y += dy;
+						x += min_tx * dx + nx * 0.4f;
+						if (x < 10) x = 10;
+						if (nx != 0) { vx = 0; }
+					}
+					if (e->nx != 0) { 
+						x += dx; 
+						if (x < 10) x = 10; 
+						y += min_ty * dy + ny * 0.4f;
+						if (ny != 0) { vy = 0; }
+					}
+				}
+				else {
+					x += min_tx * dx + nx * 0.4f;
+					if (x < 10) x = 10;
+					if (nx != 0) { vx = 0; }
 
+					y += min_ty * dy + ny * 0.4f;
+					if (ny != 0) { vy = 0; }
+				}
+			}
 		}
 	}
 
@@ -135,12 +159,20 @@ void Mario::Render() {
 
 void Mario::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	left = x;
-	top = y;
+	if (this->State == MARIO_STATE_DIVE) {
+		left = x;
+		top = y + MARIO_BIG_DIVE_BBOX_HEIGHT;
 
-	right = x + MARIO_BIG_BBOX_WIDTH;
-	bottom = y + MARIO_BIG_BBOX_HEIGHT;
+		right = x + MARIO_BIG_DIVE_BBOX_WIDTH;
+		bottom = y + MARIO_BIG_DIVE_BBOX_HEIGHT;
+	}
+	else {
+		left = x;
+		top = y;
 
+		right = x + MARIO_BIG_BBOX_WIDTH;
+		bottom = y + MARIO_BIG_BBOX_HEIGHT;
+	}
 }
 
 void Mario::setState(int State){
@@ -192,6 +224,7 @@ void Mario::setState(int State){
 		break;
 	case MARIO_STATE_DIVE:
 
+		if (this->State != MARIO_STATE_DIVE) y -= 9;
 		if (vx > 0) {
 			ax = -MARIO_FISSION;
 			if (vx < MARIO_FISSION * 1.5 * dt) { vx = 0; ax = 0; }

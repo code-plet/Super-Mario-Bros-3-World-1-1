@@ -29,7 +29,8 @@
 
 #define MARIO_BIG_BBOX_WIDTH  15
 #define MARIO_BIG_BBOX_HEIGHT 27
-
+#define MARIO_BIG_DIVE_BBOX_WIDTH 15
+#define MARIO_BIG_DIVE_BBOX_HEIGHT 18
 
 class Mario :
     public CGameObject
@@ -46,4 +47,3 @@ public:
     virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 
 };
-

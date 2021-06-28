@@ -25,6 +25,9 @@
     <Filter Include="World Objects Resources\Mobs Resources">
       <UniqueIdentifier>{bdf90fc3-45ff-4ff1-be4a-64cb6f98f37f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World Objects Resources\PowerUps">
+      <UniqueIdentifier>{0cced1dc-1f01-4d41-84f5-2c93da2cdf3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cgame.cpp">
@@ -75,6 +78,9 @@
     <ClCompile Include="BreakableBrick.cpp">
       <Filter>World Objects Resources</Filter>
     </ClCompile>
+    <ClCompile Include="GrowMushroom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cgame.h">
@@ -121,6 +127,9 @@
     </ClInclude>
     <ClInclude Include="BreakableBrick.h">
       <Filter>World Objects Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GrowMushroom.h">
+      <Filter>Source Headers Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

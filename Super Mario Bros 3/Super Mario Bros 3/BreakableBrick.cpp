@@ -3,8 +3,10 @@
 void BreakableBrick::Render() {
 
 	int ani;
-	if (State == BRICK_STATE_ACTIVE) ani = BRICK_ANI_ACTIVE;
-	Animation_Set->at(ani)->Render(x, y);
+	if (State == BRICK_STATE_ACTIVE) {
+		ani = BRICK_ANI_ACTIVE;
+		Animation_Set->at(ani)->Render(x, y);
+	}
 }
 
 void BreakableBrick::setState(int State) {
