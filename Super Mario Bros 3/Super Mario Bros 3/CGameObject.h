@@ -68,6 +68,7 @@ public:
 	void setLocation(float x, float y) { this->x = x; this->y = y; }
 	void setVelocity(float vx, float vy) { this->vx = vx; this->vy = vy; }
 	void setAccel(float ax, float ay) { this->ax = ax; this->ay = ay; }
+	void setnx(int nx) { this->nx = nx; }
 
 	int GetState() { return State; }
 	void GetLocation(float& x, float& y) { x = this->x; y = this->y; }

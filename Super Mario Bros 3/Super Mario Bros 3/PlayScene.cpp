@@ -13,22 +13,24 @@
 #include "Goomba.h"
 #include "QuestionMarkBrick.h"
 #include "BreakableBrick.h"
+#include "GrowMushroom.h"
 
 #define MAX_GAME_LINE 1024
 
-#define GAME_FILE_SECTION_UNKNOWN -1
-#define GAME_FILE_SECTION_TEXTURES 0
-#define GAME_FILE_SECTION_SPRITES 1
-#define GAME_FILE_SECTION_ANIMATIONS 2
+#define GAME_FILE_SECTION_UNKNOWN		-1
+#define GAME_FILE_SECTION_TEXTURES		 0
+#define GAME_FILE_SECTION_SPRITES		 1
+#define GAME_FILE_SECTION_ANIMATIONS	 2
 #define GAME_FILE_SECTION_ANIMATION_SETS 3
-#define GAME_FILE_SECTION_OBJECTS 4
+#define GAME_FILE_SECTION_OBJECTS		 4
 
-#define OBJECT_TYPE_MARIO 0
-#define OBJECT_TYPE_BREAKABLE_BRICK 1
-#define OBJECT_TYPE_GOOMBA 2
+#define OBJECT_TYPE_MARIO				0
+#define OBJECT_TYPE_BREAKABLE_BRICK		1
+#define OBJECT_TYPE_GOOMBA				2
 #define OBJECT_TYPE_QUESTION_MARK_BRICK 3
-#define OBJECT_TYPE_CO_OBSTACLE 98
-#define OBJECT_TYPE_DECORATIVE_OBJECT 99
+#define OBJECT_TYPE_GROWMUSHROOM		4
+#define OBJECT_TYPE_CO_OBSTACLE			98
+#define OBJECT_TYPE_DECORATIVE_OBJECT	99
 
 #define OBJECT_STATE_DIE 66
 
@@ -95,11 +97,18 @@ void PlayScene::Update(DWORD dt) {
 	vector<LPGAMEOBJECT> coObjects;
 
 	for (int i = 1; i < GameObject.size(); i++) {
-		if (GameObject[i]->GetState() == OBJECT_STATE_DIE) GameObject.erase(GameObject.begin() + i);
+		if (GameObject[i]->GetState() == OBJECT_STATE_DIE) GameObject.erase(GameObject.begin() + i); // Delete "dead" objects off array  
 	}
-	for (int i = 1; i < GameObject.size(); i++) coObjects.push_back(GameObject[i]);  // List of colliable objects
+
+	for (int i = 0; i < GameObject.size() - 1; i++) coObjects.push_back(GameObject[i]);  // List of colliable objects
 
 	for (int i = 0; i < GameObject.size(); i++) GameObject[i]->Update(dt,&coObjects); //Update object and detect collision.
+	if (coObjects.size() > GameObject.size()) {   // Objects might create other objects that needs to be added to scene.
+		for (int i = GameObject.size(); i < coObjects.size(); i++) {
+			GameObject.push_back(coObjects[i]);
+		}
+	}
+
 
 	if (Player == NULL) return;
 
@@ -243,6 +252,9 @@ void PlayScene::ParseSectionObjects(string line) {
 	case OBJECT_TYPE_QUESTION_MARK_BRICK:
 		obj = new QuestionMarkBrick();
 		obj->SetBoundingBox(atof(tokens[4].c_str()), atof(tokens[5].c_str()));
+		break;
+	case OBJECT_TYPE_GROWMUSHROOM:
+		obj = new GrowMushroom();
 		break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", type);

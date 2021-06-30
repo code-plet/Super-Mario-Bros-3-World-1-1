@@ -1,4 +1,4 @@
-﻿  Goomba.cpp
-  Mario.cpp
-  Generating Code...
+﻿  GrowMushroom.cpp
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\GrowMushroom.cpp(79,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\GrowMushroom.cpp(84,15): warning C4244: 'initializing': conversion from 'DWORD' to 'byte', possible loss of data
   Super Mario Bros 3.vcxproj -> C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Debug\Super Mario Bros 3.exe

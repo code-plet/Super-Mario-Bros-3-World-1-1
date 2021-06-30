@@ -28,6 +28,9 @@
     <Filter Include="World Objects Resources\PowerUps">
       <UniqueIdentifier>{0cced1dc-1f01-4d41-84f5-2c93da2cdf3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World Objects Headers Files\PowerUps Headers">
+      <UniqueIdentifier>{e902fd74-5024-4cba-8cee-a5d4b4cb6dee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cgame.cpp">
@@ -79,7 +82,7 @@
       <Filter>World Objects Resources</Filter>
     </ClCompile>
     <ClCompile Include="GrowMushroom.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>World Objects Resources\PowerUps</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,7 +132,7 @@
       <Filter>World Objects Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="GrowMushroom.h">
-      <Filter>Source Headers Files</Filter>
+      <Filter>World Objects Headers Files\PowerUps Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

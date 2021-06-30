@@ -7,6 +7,12 @@
 vector<LPCOLLISIONEVENT> coEvents;
 vector<LPCOLLISIONEVENT> coEventsResult;
 
+Mario::Mario() {
+
+	nx = 1;
+	this->level=MARIO_LEVEL_SMALL;
+}
+
 void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 	CGameObject::Update(dt); // Uses ax,ay to calculate vx, vy 
@@ -60,9 +66,9 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 				// jump on top >> kill Goomba and deflect a bit 
 				if (e->ny < 0)
 				{
-					if (goomba->GetState() != GOOMBA_STATE_DIE)
+					if (goomba->GetState() != GOOMBA_STATE_FLATTEN)
 					{
-						goomba->SetState(GOOMBA_STATE_DIE);
+						goomba->SetState(GOOMBA_STATE_FLATTEN);
 						vy = -MARIO_JUMP_DEFLECT_SPEED;
 					}
 				}
@@ -81,7 +87,7 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 				//If collides beneath the brick, give item.
 				QuestionMarkBrick* QMB = dynamic_cast<QuestionMarkBrick*>(e->obj);
 				if (e->ny > 0 && QMB->GetState() == QUESTION_MARK_STATE_ACTIVE) {
-						QMB->setState(QUESTION_MARK_STATE_EMPTY);
+						QMB->setState(QUESTION_MARK_STATE_DEPLOY);
 				}
 			}
 			else if (dynamic_cast<BreakableBrick*>(e->obj)) {
@@ -94,15 +100,6 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 				if (nx != 0) { vx = 0; }
 				if (ny != 0) { vy = 0; }
-				else {
-					x += min_tx * dx + nx * 0.4f;
-					if (x < 10) x = 10;
-
-					y += min_ty * dy + ny * 0.4f;
-
-					if (nx != 0) { vx = 0; }
-					if (ny != 0) { vy = 0; }
-				}
 			}
 			else if (dynamic_cast<CollidableObstacle*>(e->obj)) {
 				CollidableObstacle* CoObs = dynamic_cast<CollidableObstacle*>(e->obj);
@@ -137,21 +134,34 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 void Mario::Render() {
 
-	int ani = -1;
-	if (vy < 0 || vy> 0.017 ) if (nx == 1) ani = MARIO_ANI_JUMP_RIGHT;
-	else ani = MARIO_ANI_JUMP_LEFT;
-	else if (State == MARIO_STATE_DIVE) if (nx == 1) ani = MARIO_ANI_DIVE_RIGHT;
-	else ani = MARIO_ANI_DIVE_LEFT;
-	else if (vx > 0) if (nx == -1) ani = MARIO_ANI_BRAKE_RIGHT;
-	else ani = MARIO_ANI_WALK_RIGHT; 
-	else if (vx < 0) if (nx == 1) ani = MARIO_ANI_BRAKE_LEFT;
-	else ani = MARIO_ANI_WALK_LEFT;
-	else if (nx == 1) ani = MARIO_ANI_IDLE_RIGHT;
-	else ani = MARIO_ANI_IDLE_LEFT;
+	int ani;
 
-	int alpha = 255;
+	if (level == MARIO_LEVEL_BIG) {
+		int ani = -1;
+		if (vy < 0 || vy> 0.017) if (nx == 1) ani = MARIO_ANI_BIG_JUMP_RIGHT;
+		else ani = MARIO_ANI_BIG_JUMP_LEFT;
+		else if (State == MARIO_STATE_DIVE) if (nx == 1) ani = MARIO_ANI_BIG_DIVE_RIGHT;
+		else ani = MARIO_ANI_BIG_DIVE_LEFT;
+		else if (vx > 0) if (nx == -1) ani = MARIO_ANI_BIG_BRAKE_RIGHT;
+		else ani = MARIO_ANI_BIG_WALK_RIGHT;
+		else if (vx < 0) if (nx == 1) ani = MARIO_ANI_BIG_BRAKE_LEFT;
+		else ani = MARIO_ANI_BIG_WALK_LEFT;
+		else if (nx == 1) ani = MARIO_ANI_BIG_IDLE_RIGHT;
+		else ani = MARIO_ANI_BIG_IDLE_LEFT;
+	}
+	else if (level == MARIO_LEVEL_SMALL) {
+		int ani = -1;
+		if (vy < 0 || vy> 0.017) if (nx == 1) ani = MARIO_ANI_SMALL_JUMP_RIGHT;
+		else ani = MARIO_ANI_SMALL_JUMP_LEFT;
+		else if (vx > 0) if (nx == -1) ani = MARIO_ANI_SMALL_BRAKE_RIGHT;
+		else ani = MARIO_ANI_SMALL_WALK_RIGHT;
+		else if (vx < 0) if (nx == 1) ani = MARIO_ANI_SMALL_BRAKE_LEFT;
+		else ani = MARIO_ANI_SMALL_WALK_LEFT;
+		else if (nx == 1) ani = MARIO_ANI_SMALL_IDLE_RIGHT;
+		else ani = MARIO_ANI_SMALL_IDLE_LEFT;
+	}
 	DebugOut(L"v_x, v_y : %f, %f ", vx,vy);
-	Animation_Set->at(ani)->Render(x, y, alpha);
+	Animation_Set->at(ani)->Render(x, y);
 
 	RenderBoundingBox();
 
@@ -159,19 +169,27 @@ void Mario::Render() {
 
 void Mario::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	if (this->State == MARIO_STATE_DIVE) {
-		left = x;
-		top = y + MARIO_BIG_DIVE_BBOX_HEIGHT;
-
-		right = x + MARIO_BIG_DIVE_BBOX_WIDTH;
-		bottom = y + MARIO_BIG_DIVE_BBOX_HEIGHT;
+	if (this->level == MARIO_LEVEL_SMALL) {
+			left = x;
+			top = y;
+			right = x + MARIO_SMALL_BBOX_WIDTH;
+			bottom = y + MARIO_SMALL_BBOX_HEIGHT;
 	}
-	else {
-		left = x;
-		top = y;
+	else if (this->level == MARIO_LEVEL_BIG) {
+		if (this->State == MARIO_STATE_DIVE) {
+			left = x;
+			top = y + 9;
 
-		right = x + MARIO_BIG_BBOX_WIDTH;
-		bottom = y + MARIO_BIG_BBOX_HEIGHT;
+			right = x + MARIO_BIG_BBOX_WIDTH;
+			bottom = y + MARIO_BIG_BBOX_HEIGHT;
+		}
+		else {
+			left = x;
+			top = y;
+
+			right = x + MARIO_BIG_BBOX_WIDTH;
+			bottom = y + MARIO_BIG_BBOX_HEIGHT;
+		}
 	}
 }
 
@@ -223,16 +241,17 @@ void Mario::setState(int State){
 		}
 		break;
 	case MARIO_STATE_DIVE:
-
-		if (this->State != MARIO_STATE_DIVE) y -= 9;
-		if (vx > 0) {
-			ax = -MARIO_FISSION;
-			if (vx < MARIO_FISSION * 1.5 * dt) { vx = 0; ax = 0; }
+		if (this->level != MARIO_LEVEL_SMALL) {
+			if (vx > 0) {
+				ax = -MARIO_FISSION;
+				if (vx < MARIO_FISSION * 1.5 * dt) { vx = 0; ax = 0; }
+			}
+			if (vx < 0) {
+				ax = MARIO_FISSION;
+				if (vx > -MARIO_FISSION * 1.5 * dt) { vx = 0; ax = 0; }
+			}
 		}
-		if (vx < 0) {
-			ax = MARIO_FISSION;
-			if (vx > -MARIO_FISSION * 1.5 * dt) { vx = 0; ax = 0; }
-		}
+		else return;
 		break;
 	default:
 

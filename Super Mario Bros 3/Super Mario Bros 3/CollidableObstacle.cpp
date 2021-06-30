@@ -13,7 +13,7 @@ void CollidableObstacle::GetBoundingBox(float& left, float& top, float& right, f
 		left = x;
 		top = y;
 		right = x + Width;
-		bottom = y + 1;
+		bottom = y + 1;  // Boundin box only a thin flatform on top 
 	}
 	else {
 

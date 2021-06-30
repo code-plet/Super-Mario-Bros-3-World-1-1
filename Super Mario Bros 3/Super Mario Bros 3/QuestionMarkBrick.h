@@ -5,7 +5,10 @@
 #define QUESTION_MARK_GRAVITY      0.001f
 
 #define QUESTION_MARK_STATE_ACTIVE 100
-#define QUESTION_MARK_STATE_EMPTY  101
+#define QUESTION_MARK_STATE_DEPLOY 101
+#define QUESTION_MARK_STATE_EMPTY  102
+#define DEPLOY_POWER_UP            11
+
 
 #define QUESTION_MARK_ANI_ACTIVE   0
 #define QUESTION_MARK_ANI_EMPTY    1
@@ -15,7 +18,6 @@ class QuestionMarkBrick :
     public CollidableObstacle
 {
 protected:
-
 public:
    
     QuestionMarkBrick();
