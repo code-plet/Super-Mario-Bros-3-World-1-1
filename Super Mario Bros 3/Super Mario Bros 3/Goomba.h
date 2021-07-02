@@ -19,7 +19,7 @@ class Goomba :
     public CGameObject
 {
 protected:
-    DWORD DieTime;
+    DWORD DieTime; // to calculate when to delete Goomba corpse 
 public:
     Goomba();
     void Update(DWORD dt, vector <LPGAMEOBJECT>* coObjects = NULL);

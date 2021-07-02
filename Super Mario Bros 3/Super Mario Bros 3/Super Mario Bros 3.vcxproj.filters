@@ -84,6 +84,12 @@
     <ClCompile Include="GrowMushroom.cpp">
       <Filter>World Objects Resources\PowerUps</Filter>
     </ClCompile>
+    <ClCompile Include="BonusCoin.cpp">
+      <Filter>World Objects Resources\PowerUps</Filter>
+    </ClCompile>
+    <ClCompile Include="VenusFireTrap.cpp">
+      <Filter>World Objects Resources\Mobs Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cgame.h">
@@ -133,6 +139,12 @@
     </ClInclude>
     <ClInclude Include="GrowMushroom.h">
       <Filter>World Objects Headers Files\PowerUps Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="BonusCoin.h">
+      <Filter>World Objects Headers Files\PowerUps Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="VenusFireTrap.h">
+      <Filter>World Objects Headers Files\Mobs headers Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -10,7 +10,6 @@
 #include <dinput.h>
 
 #include "Scene.h"
-#include "KeyEventHandler.h"
 
 using namespace std;
 

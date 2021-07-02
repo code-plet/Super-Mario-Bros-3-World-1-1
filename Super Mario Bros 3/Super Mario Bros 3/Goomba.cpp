@@ -11,7 +11,6 @@ void Goomba::Update(DWORD dt, vector <LPGAMEOBJECT>* coObjects) {
 	CGameObject::Update(dt);
 
 	ay = GOOMBA_GRAVITY;
-
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 

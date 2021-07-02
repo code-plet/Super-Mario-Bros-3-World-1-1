@@ -2,6 +2,7 @@
 
 #include "KeyEventHandler.h"
 
+class Mario;
 
 class Scene
 {
@@ -17,6 +18,7 @@ public:
 
 	CKeyEventHandler* GetKeyHandler() { return KeyHandler; }
 
+	virtual Mario* GetPlayer() = 0;
 	virtual void Load() = 0;
 	virtual void Unload() = 0;
 	virtual void Update(DWORD dt) = 0;

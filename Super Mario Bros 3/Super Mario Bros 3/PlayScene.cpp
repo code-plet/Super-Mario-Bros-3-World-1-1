@@ -14,6 +14,8 @@
 #include "QuestionMarkBrick.h"
 #include "BreakableBrick.h"
 #include "GrowMushroom.h"
+#include "BonusCoin.h"
+#include "VenusFireTrap.h"
 
 #define MAX_GAME_LINE 1024
 
@@ -28,7 +30,9 @@
 #define OBJECT_TYPE_BREAKABLE_BRICK		1
 #define OBJECT_TYPE_GOOMBA				2
 #define OBJECT_TYPE_QUESTION_MARK_BRICK 3
-#define OBJECT_TYPE_GROWMUSHROOM		4
+#define OBJECT_TYPE_VENUS_FIRE_TRAP		4
+#define OBJECT_TYPE_GROWMUSHROOM		10
+#define OBJECT_TYPE_BONUSCOIN			11
 #define OBJECT_TYPE_CO_OBSTACLE			98
 #define OBJECT_TYPE_DECORATIVE_OBJECT	99
 
@@ -96,8 +100,10 @@ void PlayScene::Update(DWORD dt) {
 
 	vector<LPGAMEOBJECT> coObjects;
 
-	for (int i = 1; i < GameObject.size(); i++) {
-		if (GameObject[i]->GetState() == OBJECT_STATE_DIE) GameObject.erase(GameObject.begin() + i); // Delete "dead" objects off array  
+	for (int i = 1; i < GameObject.size(); i++) { // Delete "dead" and out of bound objects off the map
+		float x, y;
+		GameObject[i]->GetLocation(x, y);
+		if (GameObject[i]->GetState() == OBJECT_STATE_DIE || y > 450) GameObject.erase(GameObject.begin() + i);   
 	}
 
 	for (int i = 0; i < GameObject.size() - 1; i++) coObjects.push_back(GameObject[i]);  // List of colliable objects
@@ -242,6 +248,9 @@ void PlayScene::ParseSectionObjects(string line) {
 	case OBJECT_TYPE_GOOMBA:
 		obj = new Goomba();
 		break;
+	case OBJECT_TYPE_VENUS_FIRE_TRAP:
+		obj = new VenusFireTrap();
+		break;
 	case OBJECT_TYPE_CO_OBSTACLE:
 		obj = new CollidableObstacle(atof(tokens[6].c_str()));
 		obj->SetBoundingBox(atof(tokens[4].c_str()), atof(tokens[5].c_str()));
@@ -255,6 +264,9 @@ void PlayScene::ParseSectionObjects(string line) {
 		break;
 	case OBJECT_TYPE_GROWMUSHROOM:
 		obj = new GrowMushroom();
+		break;
+	case OBJECT_TYPE_BONUSCOIN:
+		obj = new BonusCoin();
 		break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", type);
@@ -276,7 +288,7 @@ void PlaySceneKeyHandler::OnKeyDown(int KeyCode) {
 	Mario* mario = ((PlayScene*)Scene)->GetPlayer();
 	switch (KeyCode)
 	{
-	case DIK_SPACE:
+	case DIK_C:
 		mario->setState(MARIO_STATE_JUMP);
 		break;
 	default:
@@ -289,6 +301,12 @@ void PlaySceneKeyHandler::KeyState(BYTE* states) {
 	Cgame* game = Cgame::GetInstance();
 	Mario* mario = ((PlayScene*)Scene)->GetPlayer();
 	if (mario->GetState() == MARIO_STATE_DIE) return;
+	if (game->IsKeyDown(DIK_X)) {
+		if (game->IsKeyDown(DIK_LEFT)) if (mario->GetVelocity_x() > 0) mario->setState(MARIO_STATE_BREAK_LEFT);
+		else mario->setState(MARIO_STATE_SPRINT_LEFT);
+		else if (game->IsKeyDown(DIK_RIGHT)) if (mario->GetVelocity_x() < 0) mario->setState(MARIO_STATE_BREAK_RIGHT);
+		else mario->setState(MARIO_STATE_SPRINT_RIGHT);
+	}
 	else if (game->IsKeyDown(DIK_LEFT)) if (mario->GetVelocity_x() > 0) mario->setState(MARIO_STATE_BREAK_LEFT);
 	else mario->setState(MARIO_STATE_WALK_LEFT);
 	else if (game->IsKeyDown(DIK_RIGHT)) if (mario->GetVelocity_x() < 0) mario->setState(MARIO_STATE_BREAK_RIGHT);

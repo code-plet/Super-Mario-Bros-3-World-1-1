@@ -145,6 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="BonusCoin.cpp" />
     <ClCompile Include="BreakableBrick.cpp" />
     <ClCompile Include="Cgame.cpp" />
     <ClCompile Include="CGameObject.cpp" />
@@ -161,9 +162,11 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="VenusFireTrap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="BonusCoin.h" />
     <ClInclude Include="BreakableBrick.h" />
     <ClInclude Include="Cgame.h" />
     <ClInclude Include="CGameObject.h" />
@@ -179,6 +182,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="VenusFireTrap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

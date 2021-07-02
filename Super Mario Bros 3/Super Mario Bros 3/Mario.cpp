@@ -3,6 +3,7 @@
 #include "QuestionMarkBrick.h"
 #include "CollidableObstacle.h"
 #include "BreakableBrick.h"
+#include "GrowMushroom.h"
 
 vector<LPCOLLISIONEVENT> coEvents;
 vector<LPCOLLISIONEVENT> coEventsResult;
@@ -10,7 +11,7 @@ vector<LPCOLLISIONEVENT> coEventsResult;
 Mario::Mario() {
 
 	nx = 1;
-	this->level=MARIO_LEVEL_SMALL;
+	this->Level=MARIO_LEVEL_SMALL;
 }
 
 void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
@@ -40,7 +41,6 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		// how to push back Mario if collides with a moving objects, what if Mario is pushed this way into another object?
 		//if (rdx != 0 && rdx!=dx)
 		//	x += nx*abs(rdx); 
-
 		// block every object first!
 		/*x += min_tx * dx + nx * 0.4f;
 		if (x < 10) x = 10;
@@ -49,8 +49,6 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 		if (nx != 0) { vx = 0; }
 		if (ny != 0) { vy = 0; }*/
-
-
 
 		//
 		// Collision logic with other objects
@@ -101,6 +99,11 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 				if (nx != 0) { vx = 0; }
 				if (ny != 0) { vy = 0; }
 			}
+			else if (dynamic_cast<GrowMushroom*>(e->obj)) {
+				GrowMushroom* coObs = dynamic_cast<GrowMushroom*>(e->obj);
+				if (this->Level == MARIO_LEVEL_SMALL) this->setLevel(MARIO_LEVEL_BIG);
+				coObs->setState(GROWMUSHROOM_STATE_CONSUMED);
+			}
 			else if (dynamic_cast<CollidableObstacle*>(e->obj)) {
 				CollidableObstacle* CoObs = dynamic_cast<CollidableObstacle*>(e->obj);
 				if (CoObs->GetTopOnly() && ( e->ny > 0 || e->nx!=0) ) {
@@ -134,28 +137,30 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 void Mario::Render() {
 
-	int ani;
+	int ani=-1;
 
-	if (level == MARIO_LEVEL_BIG) {
-		int ani = -1;
+	if (Level == MARIO_LEVEL_BIG) {
 		if (vy < 0 || vy> 0.017) if (nx == 1) ani = MARIO_ANI_BIG_JUMP_RIGHT;
 		else ani = MARIO_ANI_BIG_JUMP_LEFT;
 		else if (State == MARIO_STATE_DIVE) if (nx == 1) ani = MARIO_ANI_BIG_DIVE_RIGHT;
 		else ani = MARIO_ANI_BIG_DIVE_LEFT;
 		else if (vx > 0) if (nx == -1) ani = MARIO_ANI_BIG_BRAKE_RIGHT;
+		else if (vx > MARIO_WALKING_SPEED + 0.5f) ani = MARIO_ANI_BIG_SPRINT_RIGHT;
 		else ani = MARIO_ANI_BIG_WALK_RIGHT;
 		else if (vx < 0) if (nx == 1) ani = MARIO_ANI_BIG_BRAKE_LEFT;
+		else if (vx > -MARIO_WALKING_SPEED - 0.5f) ani = MARIO_ANI_BIG_SPRINT_LEFT;
 		else ani = MARIO_ANI_BIG_WALK_LEFT;
 		else if (nx == 1) ani = MARIO_ANI_BIG_IDLE_RIGHT;
 		else ani = MARIO_ANI_BIG_IDLE_LEFT;
 	}
-	else if (level == MARIO_LEVEL_SMALL) {
-		int ani = -1;
+	else if (Level == MARIO_LEVEL_SMALL) {
 		if (vy < 0 || vy> 0.017) if (nx == 1) ani = MARIO_ANI_SMALL_JUMP_RIGHT;
 		else ani = MARIO_ANI_SMALL_JUMP_LEFT;
 		else if (vx > 0) if (nx == -1) ani = MARIO_ANI_SMALL_BRAKE_RIGHT;
+		else if (vx > MARIO_WALKING_SPEED + 0.5f) ani = MARIO_ANI_SMALL_SPRINT_RIGHT;
 		else ani = MARIO_ANI_SMALL_WALK_RIGHT;
 		else if (vx < 0) if (nx == 1) ani = MARIO_ANI_SMALL_BRAKE_LEFT;
+		else if (vx > -MARIO_WALKING_SPEED - 0.5f) ani = MARIO_ANI_SMALL_SPRINT_LEFT;
 		else ani = MARIO_ANI_SMALL_WALK_LEFT;
 		else if (nx == 1) ani = MARIO_ANI_SMALL_IDLE_RIGHT;
 		else ani = MARIO_ANI_SMALL_IDLE_LEFT;
@@ -169,13 +174,13 @@ void Mario::Render() {
 
 void Mario::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	if (this->level == MARIO_LEVEL_SMALL) {
+	if (this->Level == MARIO_LEVEL_SMALL) {
 			left = x;
 			top = y;
 			right = x + MARIO_SMALL_BBOX_WIDTH;
 			bottom = y + MARIO_SMALL_BBOX_HEIGHT;
 	}
-	else if (this->level == MARIO_LEVEL_BIG) {
+	else if (this->Level == MARIO_LEVEL_BIG) {
 		if (this->State == MARIO_STATE_DIVE) {
 			left = x;
 			top = y + 9;
@@ -241,7 +246,7 @@ void Mario::setState(int State){
 		}
 		break;
 	case MARIO_STATE_DIVE:
-		if (this->level != MARIO_LEVEL_SMALL) {
+		if (this->Level != MARIO_LEVEL_SMALL) {
 			if (vx > 0) {
 				ax = -MARIO_FISSION;
 				if (vx < MARIO_FISSION * 1.5 * dt) { vx = 0; ax = 0; }
@@ -253,10 +258,32 @@ void Mario::setState(int State){
 		}
 		else return;
 		break;
+	case MARIO_STATE_SPRINT_RIGHT:
+
+		if (vx <= MARIO_SPRINTING_SPEED) ax = MARIO_FISSION*1.5;
+		else ax = 0;
+		nx = 1;
+		break;
+
+	case MARIO_STATE_SPRINT_LEFT:
+
+		if (vx >= -MARIO_SPRINTING_SPEED) ax = -MARIO_FISSION*1.5;
+		else ax = 0;
+		nx = -1;
+		break;
+
 	default:
 
 		break;
 	}
 
 	CGameObject::setState(State);
+}
+
+void Mario::setLevel(int level) {
+
+	if (this->Level == MARIO_LEVEL_SMALL && level == MARIO_LEVEL_BIG) {
+		this->Level = MARIO_LEVEL_BIG;
+		this->y -= 13;
+	}
 }

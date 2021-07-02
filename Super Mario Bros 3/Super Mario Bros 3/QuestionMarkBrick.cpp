@@ -11,7 +11,7 @@ void QuestionMarkBrick::Update(DWORD dt, vector <LPGAMEOBJECT>* coObjects) {
 		for (int i = 0; i < coObjects->size(); i++) {
 			float obj_x, obj_y;
 			coObjects->at(i)->GetLocation(obj_x, obj_y);
-			if (this->x == obj_x && this->y == obj_y) {
+			if (this->x == obj_x && this->y == obj_y && !dynamic_cast<QuestionMarkBrick*>(coObjects->at(i))) {
 				coObjects->at(i)->setState(DEPLOY_POWER_UP);
 			}
 		}
