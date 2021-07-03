@@ -2,6 +2,7 @@
 
 #include "VenusFireTrap.h"
 #include "PlayScene.h"
+#include "Fireball.h"
 
 VenusFireTrap::VenusFireTrap() {
 
@@ -9,14 +10,14 @@ VenusFireTrap::VenusFireTrap() {
 
 }
 
-void VenusFireTrap::Update(DWORD dt, vector <LPGAMEOBJECT>* coObjects) {
+void VenusFireTrap::Update(DWORD dt, vector <LPGAMEOBJECT>* coObjects) { // Separate Firetrap into consecutive stages for easy coding  
 
 	CGameObject::Update(dt);
 	y += dy;
 	float mario_x, mario_y;
 	Cgame::GetInstance()->GetCurrentScene()->GetPlayer()->GetLocation(mario_x,mario_y);
 	if (this->State == VENUSFIRETRAP_STATE_SLEEP) {
-		if (abs(this->x - mario_x) < 200 && abs(this->y - mario_y) < 50) 
+		if (abs(this->x - mario_x) < 200 && abs(this->y - mario_y) < 100) 
 			if(mario_x-this->x<=25 && mario_x - this->x >=-10 && this->y - mario_y <= 45 && this->y - mario_y >= -2) {
 				setState(VENUSFIRETRAP_STATE_HIDE);
 			}
@@ -25,15 +26,18 @@ void VenusFireTrap::Update(DWORD dt, vector <LPGAMEOBJECT>* coObjects) {
 				setState(VENUSFIRETRAP_STATE_DEPLOY);
 			}
 	}
-	else if (OG_y - y > VENUSFIRETRAP_HEIGHT+8 && this->State==VENUSFIRETRAP_STATE_DEPLOY) {
+	else if (OG_y - y > VENUSFIRETRAP_HEIGHT+6 && this->State==VENUSFIRETRAP_STATE_DEPLOY) {
 		this->setState(VENUSFIRETRAP_STATE_FIRE);
 		this->Ready_time = GetTickCount();
 	}
 	else if (this->State == VENUSFIRETRAP_STATE_FIRE) {
 
 		DWORD currenttime = GetTickCount();
-		if (currenttime - this->Ready_time > VENUSFIRETRAP_WAIT_TIME)
+		if (currenttime - this->Ready_time > VENUSFIRETRAP_WAIT_TIME) // wait for <time> then fire then wait again before going down
 		{
+			LPGAMEOBJECT fireball = new Fireball();
+			Cgame::GetInstance()->GetCurrentScene()->AddGameObject(fireball, this->x, this->y, FIREBALL_ANIMATION_SET);
+
 			this->Ready_time = GetTickCount();
 			this->setState(VENUSFIRETRAP_STATE_FIRED);
 		}

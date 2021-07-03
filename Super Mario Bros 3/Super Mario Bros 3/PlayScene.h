@@ -26,6 +26,8 @@ public:
 
 	Mario* GetPlayer() { return Player; }
 
+	void AddGameObject(LPGAMEOBJECT obj, float x, float y, int Animation_set);
+
 	virtual void Load();
 	virtual void Update(DWORD dt);
 	virtual void Unload();

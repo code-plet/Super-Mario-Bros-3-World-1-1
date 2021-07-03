@@ -7,11 +7,11 @@
 #define VENUSFIRETRAP_HEIGHT    32
 #define VENUSFIRETRAP_WIDTH     16
 
-#define VENUSFIRETRAP_STATE_SLEEP   100
-#define VENUSFIRETRAP_STATE_DEPLOY  101
-#define VENUSFIRETRAP_STATE_FIRE    102
-#define VENUSFIRETRAP_STATE_FIRED   103
-#define VENUSFIRETRAP_STATE_HIDE    104
+#define VENUSFIRETRAP_STATE_SLEEP   100     // Sleeps in the tunnel, ready for whenever Mario is in range
+#define VENUSFIRETRAP_STATE_DEPLOY  101     // Rises up until hitting peak height
+#define VENUSFIRETRAP_STATE_FIRE    102     // FireTrap takes a moment to aim and fire
+#define VENUSFIRETRAP_STATE_FIRED   103     // Waits a while before going down
+#define VENUSFIRETRAP_STATE_HIDE    104     // Goes down and wait for <cooldown time>
 #define VENUSFIRETRAP_STATE_DIE     66
 
 #define VENUSFIRETRAP_ANI_DEPLOYING_DOWN_RIGHT       0
@@ -29,7 +29,7 @@ class VenusFireTrap :
 protected: 
 
     float OG_y = 0;   // calculate peak height
-    DWORD Ready_time; // to calculate when to fire 
+    DWORD Ready_time; // to calculate when to fire (Cooldown_time = this*2.5)
 
 public:
 

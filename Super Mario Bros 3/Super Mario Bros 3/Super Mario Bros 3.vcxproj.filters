@@ -90,6 +90,9 @@
     <ClCompile Include="VenusFireTrap.cpp">
       <Filter>World Objects Resources\Mobs Resources</Filter>
     </ClCompile>
+    <ClCompile Include="Fireball.cpp">
+      <Filter>World Objects Resources\Mobs Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cgame.h">
@@ -144,6 +147,9 @@
       <Filter>World Objects Headers Files\PowerUps Headers</Filter>
     </ClInclude>
     <ClInclude Include="VenusFireTrap.h">
+      <Filter>World Objects Headers Files\Mobs headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Fireball.h">
       <Filter>World Objects Headers Files\Mobs headers Files</Filter>
     </ClInclude>
   </ItemGroup>

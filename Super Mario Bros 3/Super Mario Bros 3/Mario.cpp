@@ -4,6 +4,7 @@
 #include "CollidableObstacle.h"
 #include "BreakableBrick.h"
 #include "GrowMushroom.h"
+#include "VenusFireTrap.h"
 
 vector<LPCOLLISIONEVENT> coEvents;
 vector<LPCOLLISIONEVENT> coEventsResult;
@@ -103,6 +104,10 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 				GrowMushroom* coObs = dynamic_cast<GrowMushroom*>(e->obj);
 				if (this->Level == MARIO_LEVEL_SMALL) this->setLevel(MARIO_LEVEL_BIG);
 				coObs->setState(GROWMUSHROOM_STATE_CONSUMED);
+			}
+			else if (dynamic_cast<VenusFireTrap*>(e->obj)) {
+				if (this->Level == MARIO_LEVEL_BIG) this->setLevel(MARIO_LEVEL_SMALL);
+				else if (this->Level == MARIO_LEVEL_SMALL) this->Reset();
 			}
 			else if (dynamic_cast<CollidableObstacle*>(e->obj)) {
 				CollidableObstacle* CoObs = dynamic_cast<CollidableObstacle*>(e->obj);

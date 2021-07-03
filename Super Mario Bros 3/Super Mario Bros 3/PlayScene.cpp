@@ -109,12 +109,6 @@ void PlayScene::Update(DWORD dt) {
 	for (int i = 0; i < GameObject.size() - 1; i++) coObjects.push_back(GameObject[i]);  // List of colliable objects
 
 	for (int i = 0; i < GameObject.size(); i++) GameObject[i]->Update(dt,&coObjects); //Update object and detect collision.
-	if (coObjects.size() > GameObject.size()) {   // Objects might create other objects that needs to be added to scene.
-		for (int i = GameObject.size(); i < coObjects.size(); i++) {
-			GameObject.push_back(coObjects[i]);
-		}
-	}
-
 
 	if (Player == NULL) return;
 
@@ -277,6 +271,12 @@ void PlayScene::ParseSectionObjects(string line) {
 	obj->setAnimationSet(AnimationSets::GetInstance()->GetSet(atoi(tokens[3].c_str())));
 	GameObject.push_back(obj);
 
+}
+
+void PlayScene::AddGameObject(LPGAMEOBJECT obj,float x,float y, int Animation_set) {
+	obj->setLocation(x, y);
+	obj->setAnimationSet(AnimationSets::GetInstance()->GetSet(Animation_set));
+	GameObject.push_back(obj);
 }
 
 void PlayScene::clear() {}
