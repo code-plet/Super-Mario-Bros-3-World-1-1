@@ -93,6 +93,9 @@
     <ClCompile Include="Fireball.cpp">
       <Filter>World Objects Resources\Mobs Resources</Filter>
     </ClCompile>
+    <ClCompile Include="RacoonLeaf.cpp">
+      <Filter>World Objects Resources\PowerUps</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cgame.h">
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="Fireball.h">
       <Filter>World Objects Headers Files\Mobs headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RacoonLeaf.h">
+      <Filter>World Objects Headers Files\PowerUps Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

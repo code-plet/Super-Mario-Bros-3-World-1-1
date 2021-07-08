@@ -99,8 +99,11 @@ void PlayScene::Load() {
 void PlayScene::Update(DWORD dt) {
 
 	vector<LPGAMEOBJECT> coObjects;
+	float mario_x, mario_y;
+	this->GetPlayer()->GetLocation(mario_x, mario_y);
+	if (mario_y > 440) this->GetPlayer()->Reset();
 
-	for (int i = 1; i < GameObject.size(); i++) { // Delete "dead" and out of bound objects off the map
+	for (int i = 1; i < GameObject.size(); i++) { // Delete "dead" objects and out of bound objects off the map
 		float x, y;
 		GameObject[i]->GetLocation(x, y);
 		if (GameObject[i]->GetState() == OBJECT_STATE_DIE || y > 450) GameObject.erase(GameObject.begin() + i);   

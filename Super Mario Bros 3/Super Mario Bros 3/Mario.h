@@ -11,7 +11,6 @@
 #define MARIO_LEVEL_SMALL       0
 #define MARIO_LEVEL_BIG         1
 
-#define MARIO_STATE_DIE           200
 #define MARIO_STATE_IDLE          200
 #define MARIO_STATE_JUMP          201
 #define MARIO_STATE_DIE           202
@@ -48,7 +47,7 @@
 #define MARIO_ANI_BIG_SPRINT_LEFT  11
 
 #define MARIO_SMALL_BBOX_WIDTH  15
-#define MARIO_SMALL_BBOX_HEIGHT 16
+#define MARIO_SMALL_BBOX_HEIGHT 15
 
 #define MARIO_BIG_BBOX_WIDTH  15
 #define MARIO_BIG_BBOX_HEIGHT 27

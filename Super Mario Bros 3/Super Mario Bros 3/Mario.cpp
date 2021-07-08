@@ -17,7 +17,7 @@ Mario::Mario() {
 
 void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
-	CGameObject::Update(dt); // Uses ax,ay to calculate vx, vy 
+	CGameObject::Update(dt); // Uses ax,ay to calculate vx, vy
 
 	ay = MARIO_GRAVITY;
 

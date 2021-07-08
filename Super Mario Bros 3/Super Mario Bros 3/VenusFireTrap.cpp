@@ -15,7 +15,8 @@ void VenusFireTrap::Update(DWORD dt, vector <LPGAMEOBJECT>* coObjects) { // Sepa
 	CGameObject::Update(dt);
 	y += dy;
 	float mario_x, mario_y;
-	Cgame::GetInstance()->GetCurrentScene()->GetPlayer()->GetLocation(mario_x,mario_y);
+	Mario* mario = Cgame::GetInstance()->GetCurrentScene()->GetPlayer();
+	mario->GetLocation(mario_x, mario_y);
 	if (this->State == VENUSFIRETRAP_STATE_SLEEP) {
 		if (abs(this->x - mario_x) < 200 && abs(this->y - mario_y) < 100) 
 			if(mario_x-this->x<=25 && mario_x - this->x >=-10 && this->y - mario_y <= 45 && this->y - mario_y >= -2) {
@@ -35,8 +36,9 @@ void VenusFireTrap::Update(DWORD dt, vector <LPGAMEOBJECT>* coObjects) { // Sepa
 		DWORD currenttime = GetTickCount();
 		if (currenttime - this->Ready_time > VENUSFIRETRAP_WAIT_TIME) // wait for <time> then fire then wait again before going down
 		{
-			LPGAMEOBJECT fireball = new Fireball();
-			Cgame::GetInstance()->GetCurrentScene()->AddGameObject(fireball, this->x, this->y, FIREBALL_ANIMATION_SET);
+			CGameObject::GetObjectPosition(this->x, this->y, mario_x, mario_y);
+			LPGAMEOBJECT fireball = new Fireball(CGameObject::GetObjectPosition(this->x, this->y, mario_x, mario_y));
+			Cgame::GetInstance()->GetCurrentScene()->AddGameObject(fireball, this->x + 5, this->y + 5, FIREBALL_ANIMATION_SET);
 
 			this->Ready_time = GetTickCount();
 			this->setState(VENUSFIRETRAP_STATE_FIRED);

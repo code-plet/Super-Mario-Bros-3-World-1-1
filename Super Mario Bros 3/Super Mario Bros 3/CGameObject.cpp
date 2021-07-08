@@ -117,3 +117,49 @@ void CGameObject::RenderBoundingBox()
 
 	Cgame::GetInstance()->Draw(x, y, bbox, rect.left, rect.top, rect.right, rect.bottom, 32);
 }
+
+int CGameObject::GetObjectPosition(float primary_x, float primary_y, float secondary_x, float secondary_y) {
+
+	int direction=-1;
+	
+	secondary_x -= primary_x;
+	secondary_y -= primary_y;
+
+	if (secondary_x > 0) {
+		if (secondary_y > 0) {
+
+			//NorthEast
+			if (abs(secondary_x) > abs(secondary_y)) {
+
+				direction = DIRECTION_NORTHEAST_LOWER;
+			}
+			else direction = DIRECTION_NORTHEAST_UPPER;
+		}
+		else {
+
+			//SouthEast
+			if (abs(secondary_x) > abs(secondary_y)) {
+				direction = DIRECTION_SOUTHEAST_UPPER;
+			}
+			else direction = DIRECTION_SOUTHEAST_LOWER;
+		}
+	}
+	else {
+		if (secondary_y > 0) {
+			//NorthWest
+			if (abs(secondary_x) > abs(secondary_y)) {
+
+				direction = DIRECTION_NORTHWEST_LOWER;
+			}
+			else direction = DIRECTION_NORTHWEST_UPPER;
+		}
+		else {
+			//SouthWest
+			if (abs(secondary_x) > abs(secondary_y)) {
+				direction = DIRECTION_SOUTHWEST_UPPER;
+			}
+			else direction = DIRECTION_SOUTHWEST_LOWER;
+		}
+	}
+	return direction;
+}

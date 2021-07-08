@@ -10,6 +10,15 @@ using namespace std;
 
 #define ID_TEX_BBOX -100
 
+#define DIRECTION_NORTHWEST_UPPER 0
+#define DIRECTION_NORTHWEST_LOWER 1
+#define DIRECTION_SOUTHWEST_UPPER 2
+#define DIRECTION_SOUTHWEST_LOWER 3
+#define DIRECTION_SOUTHEAST_UPPER 4
+#define DIRECTION_SOUTHEAST_LOWER 5
+#define DIRECTION_NORTHEAST_UPPER 6
+#define DIRECTION_NORTHEAST_LOWER 7
+
 class CGameObject;
 typedef CGameObject* LPGAMEOBJECT;
 
@@ -97,6 +106,6 @@ public:
 	void setAnimationSet(LPANIMATIONSET aniset) { Animation_Set = aniset; }
 	virtual void setState(int State) { this->State = State; }
 
-
+	int GetObjectPosition(float primary_x, float primary_y, float secondary_x, float secondary_y); // calculate secondary object respective position to primary object.
 
 }; 

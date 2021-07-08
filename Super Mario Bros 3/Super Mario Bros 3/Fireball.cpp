@@ -1,9 +1,42 @@
 #include "Fireball.h"
 
 Fireball::Fireball(int direction) {
-	if(direction == 0) //right top
-	this->vx = FIREBALL_SPEED;
-	this->vy = FIREBALL_SPEED;
+	switch (direction) {
+	case DIRECTION_NORTHWEST_UPPER:
+		vx = -FIREBALL_SPEED;
+		vy = FIREBALL_SPEED * 2;
+		break;
+	case DIRECTION_NORTHWEST_LOWER:
+		vx = -FIREBALL_SPEED * 2;
+		vy = FIREBALL_SPEED;
+		break;
+	case DIRECTION_SOUTHWEST_UPPER:
+		vx = -FIREBALL_SPEED * 2;
+		vy = -FIREBALL_SPEED;
+		break;
+	case DIRECTION_SOUTHWEST_LOWER:
+		vx = -FIREBALL_SPEED;
+		vy = -FIREBALL_SPEED * 2;
+		break;
+	case DIRECTION_SOUTHEAST_UPPER:
+		vx = FIREBALL_SPEED * 2;
+		vy = -FIREBALL_SPEED;
+		break;
+	case DIRECTION_SOUTHEAST_LOWER:
+		vx = FIREBALL_SPEED;
+		vy = -FIREBALL_SPEED * 2;
+		break;
+	case DIRECTION_NORTHEAST_UPPER:
+		vx = FIREBALL_SPEED;
+		vy = FIREBALL_SPEED * 2;
+		break;
+	case DIRECTION_NORTHEAST_LOWER:
+		vx = FIREBALL_SPEED * 2;
+		vy = FIREBALL_SPEED;
+		break;
+	default:
+		break;
+	}
 }
 
 void Fireball::Update(DWORD dt, vector <LPGAMEOBJECT>* coObjects) {

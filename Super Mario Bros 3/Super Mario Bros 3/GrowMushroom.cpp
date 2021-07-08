@@ -68,7 +68,7 @@ void GrowMushroom::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 }
 
 void GrowMushroom::Render() {
-	Animation_Set->at(0)->Render(x, y);
+	Animation_Set->at(GROWMUSHROOM_ANI)->Render(x, y);
 }
 
 void GrowMushroom::setState(int state) {

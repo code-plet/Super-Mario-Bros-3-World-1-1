@@ -111,7 +111,7 @@
 #Wooden Tile headed Tunnel
 41104	2256	368	2287	416	30
 #Wooden Tile bottom Tunnel
-41105	2256	112	2288	320	30  
+41105	2256	112	2290	320	30  
 #=First Moutain Block Group=#
 #first block
 41203	240	368	288	416	30
@@ -150,10 +150,25 @@
 41306	1408	192	1424	208	30
 
 #===============Power-Ups========================
+#Super_Mushroom
 41400	300	189	316	205	20
+#Consumable coin
+41401	1073	320	1087	336	30
+#Racoon_leaf
+#flying left 
+41402	300	208	315	221	20
+#flying right
+41403	284	244	299	257	20
 #===============Decorative Object==========================
 #Tall_Bushes
+#First bush
 42001	15	351	144	416	30
+#second bush 
+42002	817	336	944	400	30
+#small bush
+42003	944	352	1008	400	30
+#high bush
+42004	2368	288	2464	416	30
 #rolling brick debris
 42006	484	120	492	128	20
 42007	470	120	478	128	20
@@ -163,6 +178,14 @@
 42010	300	99	315	115	20
 42011	318	99	333	115	20
 42012	336	99	351	115	20
+#Tiny Bush
+42013	160	400	176	416	30
+#two-headed cloud
+42014	120	273	168	296	30
+#one-headed cloud
+42015	328	257	360	280	30
+#three-headed cloud
+42016	728	305	792	328	30
 #Ending Area
 42100	2480	47	2815	416	30
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
@@ -289,16 +312,37 @@
 1302	41306	100
 
 #===============Power-Ups==============#
+#Super_Mushroom
 1400 	41400	100
-
+#consumable coin
+1401	41401	100
+#Racoon_leaf
+#flying left
+1402	41402	100
+#flying right
+1403	41403	100
 #===============Decorative Objects==============#
 #===Bushes=====#
 #First_Bush
 2100	42001	100
+#second_bush
+2101	42002	100
+#small bush
+2102	42003	100
+#high bush
+2103	42004	100
 #Rolling brick debris
 2106	42006	100	42007	100	42008	100	42009	100
 #Bonus_coin 
 2107	42010	100	42011	100	42012	100
+#Tiny_bush
+2108	42013	100
+#two-headed cloud
+2109	42014	100
+#one-headed cloud
+2110	42015	100
+#three-headed cloud
+2111	42016	100
 #Ending Area
 2199	42100	100
 #
@@ -360,6 +404,10 @@
 #===Power-Ups=====#
 #Super Mushroom
 60	1400
+#Consumable coins
+61	1401
+#Racoon_leaf
+62	1402	1403
 #========Decorative Animation=======#
 #first Bush
 101	2100
@@ -371,14 +419,74 @@
 104	703	704	705	706	707	708	709	710
 #FireBall
 105	711
+#Tiny_bush
+106	2108
+#Second bush
+107	2101
+#Small Bush
+108	2102
+#high bush
+109	2103
+#two-headed cloud
+110	2109
+#one-headed cloud
+111	2110
+#three-headed cloud
+112	2111	
 #Ending Area
 199	2199
 [OBJECTS]
 # type	x	y	ani_set_id	extra_settings per object type
 # types: 0 = Mario; 1= Breakable Brick ; 2 = Goomba; 3 = Question Mark Brick; 4 = FireVenustrap; 98 = Collidable Obstacle: + Height +Width; 99 = Decorative Object;
-# Power-Up's types: 10 = Super-Mushroom; 11 = Bonus coin
+# Power-Up's types: 10 = Super-Mushroom; 11 = Bonus coin; 12= Racoon leaf;
 # QUESTION MARK BRICK 5th variable, types: 0 = none; 1 = coin; 2= GrowMushroom;
- 
+
+#============Decorative Objects================#
+#First_Bush
+99	16	335.0	101
+#============Tiny bush=============#
+#=====Area 1=======#
+99	160.0	384.0	106
+99	176.0	384.0	106
+99	192.0	384.0	106
+#=====Area 2=======#
+99	672.0	368.0	106
+99	688.0	368.0	106
+99	704.0	368.0	106
+99	720.0	368.0	106
+99	736.0	368.0	106
+#Edge
+99	1040.0	368.0	106
+99	1056.0	368.0	106
+#=====Area 3=======#
+99	1184.0	384.0	106
+99	1200.0	384.0	106
+99	1216.0	384.0	106
+#by_the_stair
+99	1728.0	384.0	106
+99	1744.0	384.0	106
+99	1760.0	384.0	106
+#Second_Bush
+99	817.0	320.0	107
+#=====small bush======#
+99	944.0	336.0	108
+#by_the_bricks
+99	1889.0	352.0	108
+#tall bush
+99	2368.0	272.0	109
+#======Clouds=======#
+#two-headed cloud
+99	120.0	257.0	110
+#one-headed cloud
+99	328.0	241.0	111
+99	648.0	257.0	111
+99	1176.0	257.0	111
+99	2328.0	273.0	111
+#three-headed cloud
+99	728.0	289.0	112
+99	1656.0	257.0	112
+#Ending Area 
+99	2480	31	199
 #============WOODEN SQUARE TILE===============#
 #=====Area 3=======#
 98	1504.0	320.0	2	16	16	0
@@ -445,6 +553,7 @@
 #=====Area 5=======#
 98	2256.0	352.0	24	48	32	0
 98	2256.0	96.0	25	208	32	0
+98	2320.0	368.0	20	32	32	0
 #================Moutain Block Groups==========#
 #=====Area 1=======#
 #=first Group=
@@ -484,11 +593,6 @@
 98	1648	160.0	28	16	16	1
 98	1664	160.0	28	16	16	1
 98	1680	160.0	28	16	16	1
-#============Decorative Objects================#
-#First_Bush
-#99	16	335.0	101
-#Ending Area 
-99	2480	31	199
 #================Mobs====================#
 #==========GOOMBAS========================#
 #=====Area 1=======#
@@ -497,10 +601,15 @@
 # MARIO
 0	60.0	355.0	1
 #============Power-Ups \\P-Ups should have the same location as their containers. 
+#coins
 11	160.0	330.0	103
 11	176.0	330.0	103
 11	210.0	282.0	103
+#Super Mushroom
 10	226.0	282.0	60
+#Racoon leaf
+12	656.0	369.0	62
+12	1472.0	352.0	62
 #=====area 2=======#
 11	656.0	368.0	103
 11	704.0	336.0	103
@@ -512,9 +621,11 @@
 3	210.0	282.0	0	16	16	0
 3	226.0	282.0	0	16	16	0
 #=====area 2=======#
+3	416	304.0	0	16	16	0
 3	656.0	368.0	0	16	16	0
 3	704.0	336.0	0	16	16	0
 3	1472.0	352.0	0	16	16	0
+#============Consumable coins===============#
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id
 #50	300	98	0	316	150	2

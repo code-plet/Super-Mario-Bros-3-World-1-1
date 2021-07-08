@@ -13,7 +13,7 @@
 #define GROWMUSHROOM_BBOX_HEIGHT    16
 #define GROWMUSHROOM_BBOX_WIDTH     16
 
-#define GROWMUSHROOOM_ANI 0
+#define GROWMUSHROOM_ANI 0
 
 class GrowMushroom :
     public CGameObject
