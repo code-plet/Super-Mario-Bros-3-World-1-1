@@ -163,6 +163,7 @@
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Turtle.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="VenusFireTrap.cpp" />
   </ItemGroup>
@@ -185,6 +186,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Turtle.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="VenusFireTrap.h" />
   </ItemGroup>

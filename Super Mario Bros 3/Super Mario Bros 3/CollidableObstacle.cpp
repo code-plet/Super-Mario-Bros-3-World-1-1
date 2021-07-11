@@ -1,5 +1,9 @@
 #include "CollidableObstacle.h"
 
+CollidableObstacle::CollidableObstacle() {
+	this->TopOnly = 0;
+}
+
 void CollidableObstacle::Render() {
 
 	Animation_Set->at(OBSTACLE_ANI)->Render(x, y);

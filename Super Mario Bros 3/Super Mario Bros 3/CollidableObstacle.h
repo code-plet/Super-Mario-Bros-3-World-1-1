@@ -10,7 +10,7 @@ protected:
     bool TopOnly;
 public:
 
-    CollidableObstacle() {}
+    CollidableObstacle();
     CollidableObstacle(bool top_only) { this->TopOnly = top_only; }
     bool GetTopOnly() { return TopOnly; }
 

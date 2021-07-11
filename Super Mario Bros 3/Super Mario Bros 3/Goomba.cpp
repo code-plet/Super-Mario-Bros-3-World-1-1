@@ -3,7 +3,7 @@
 
 Goomba::Goomba() {
 
-	SetState(GOOMBA_STATE_ALIVE);
+	setState(GOOMBA_STATE_ALIVE);
 }
 
 void Goomba::Update(DWORD dt, vector <LPGAMEOBJECT>* coObjects) {
@@ -63,13 +63,13 @@ void Goomba::Render() {
 	if (State == GOOMBA_STATE_ALIVE) ani = GOOMBA_ANI_ALIVE;
 	else if (State == GOOMBA_STATE_FLATTEN) {
 		DWORD CurrentDieTime = GetTickCount();
-		if (CurrentDieTime - this->DieTime > 200) this->SetState(GOOMBA_STATE_DIE);
+		if (CurrentDieTime - this->DieTime > 200) this->setState(GOOMBA_STATE_DIE);
 		ani = GOOMBA_ANI_FLATTEN;
 	}
 	Animation_Set->at(ani)->Render(x, y);
 }
 
-void Goomba::SetState(int State) {
+void Goomba::setState(int State) {
 
 	this->State = State;
 	switch (State)

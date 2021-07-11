@@ -96,6 +96,9 @@
     <ClCompile Include="RacoonLeaf.cpp">
       <Filter>World Objects Resources\PowerUps</Filter>
     </ClCompile>
+    <ClCompile Include="Turtle.cpp">
+      <Filter>World Objects Resources\Mobs Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cgame.h">
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="RacoonLeaf.h">
       <Filter>World Objects Headers Files\PowerUps Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Turtle.h">
+      <Filter>World Objects Headers Files\Mobs headers Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

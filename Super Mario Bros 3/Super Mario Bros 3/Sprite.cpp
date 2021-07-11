@@ -13,7 +13,6 @@ Sprite::Sprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTU
 void Sprite::Draw(float x, float y, int alpha) {
 
 	Cgame* game = Cgame::GetInstance();
-	DebugOut(L"draws %i %i %i %i at %f %f\n", left, top, right, bottom, x, y);
 	game->Draw(x, y, texture, left, top, right, bottom, alpha);
 	
 }

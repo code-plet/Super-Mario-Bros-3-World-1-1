@@ -1,26 +1,4 @@
-﻿  Cgame.cpp
-  Mario.cpp
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\Mario.cpp(268,58): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\Mario.cpp(275,60): warning C4305: '=': truncation from 'double' to 'float'
-  PlayScene.cpp
-  D:\important files\game dev\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\Cgame.h(8,1): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
-D:\important files\game dev\Include\dinput.h(42): message : see previous definition of 'DIRECTINPUT_VERSION'
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(106,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(112,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(114,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(131,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(144,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(190,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(209,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(243,52): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(243,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(253,52): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(253,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(260,52): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(260,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(273,48): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(273,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  VenusFireTrap.cpp
-  Generating Code...
+﻿  Mario.cpp
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\Mario.cpp(359,58): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\Mario.cpp(366,60): warning C4305: '=': truncation from 'double' to 'float'
   Super Mario Bros 3.vcxproj -> C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Debug\Super Mario Bros 3.exe

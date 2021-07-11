@@ -16,6 +16,8 @@
 #include "GrowMushroom.h"
 #include "BonusCoin.h"
 #include "VenusFireTrap.h"
+#include "RacoonLeaf.h"
+#include "Turtle.h"
 
 #define MAX_GAME_LINE 1024
 
@@ -31,8 +33,10 @@
 #define OBJECT_TYPE_GOOMBA				2
 #define OBJECT_TYPE_QUESTION_MARK_BRICK 3
 #define OBJECT_TYPE_VENUS_FIRE_TRAP		4
+#define OBJECT_TYPE_TURTLE				5
 #define OBJECT_TYPE_GROWMUSHROOM		10
 #define OBJECT_TYPE_BONUSCOIN			11
+#define OBJECT_TYPE_RACOONLEAF			12
 #define OBJECT_TYPE_CO_OBSTACLE			98
 #define OBJECT_TYPE_DECORATIVE_OBJECT	99
 
@@ -264,6 +268,13 @@ void PlayScene::ParseSectionObjects(string line) {
 		break;
 	case OBJECT_TYPE_BONUSCOIN:
 		obj = new BonusCoin();
+		break;
+	case OBJECT_TYPE_RACOONLEAF:
+		obj = new RacoonLeaf();
+		break;
+	case OBJECT_TYPE_TURTLE:
+		if (atof(tokens[6].c_str())) obj = new Turtle(atoi(tokens[4].c_str()), atoi(tokens[5].c_str()), atof(tokens[7].c_str()), atof(tokens[8].c_str()), atof(tokens[9].c_str()), atof(tokens[10].c_str()));
+		else obj = new Turtle(atof(tokens[4].c_str()), atof(tokens[5].c_str()));
 		break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", type);
