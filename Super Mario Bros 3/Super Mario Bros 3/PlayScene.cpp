@@ -102,10 +102,21 @@ void PlayScene::Load() {
 
 void PlayScene::Update(DWORD dt) {
 
-	vector<LPGAMEOBJECT> coObjects;
+	vector<LPGAMEOBJECT> RenderObjects;
 	float mario_x, mario_y;
-	this->GetPlayer()->GetLocation(mario_x, mario_y);
-	if (mario_y > 440) this->GetPlayer()->Reset();
+	Player->GetLocation(mario_x, mario_y);
+
+	if (Player == NULL) return;
+
+	Cgame* game = Cgame::GetInstance();
+	mario_x -= game->GetScreenWidth() / 2;
+	mario_y -= game->GetScreenHeight() / 2;
+
+	rect camera { mario_x,mario_y,mario_x + game->GetScreenWidth(), mario_y + game->GetScreenHeight() };
+
+	this->quadtree->Intersect(camera, &RenderObjects);
+
+	vector<LPGAMEOBJECT> coObjects = RenderObjects;
 
 	for (int i = 1; i < GameObject.size(); i++) { // Delete "dead" objects and out of bound objects off the map
 		float x, y;
@@ -117,16 +128,7 @@ void PlayScene::Update(DWORD dt) {
 
 	for (int i = 0; i < GameObject.size(); i++) GameObject[i]->Update(dt,&coObjects); //Update object and detect collision.
 
-	if (Player == NULL) return;
-
-	float cx, cy;
-	Player->GetLocation(cx, cy);
-
-	Cgame* game = Cgame::GetInstance();
-	cx -= game->GetScreenWidth() / 2;
-	cy -= game->GetScreenHeight() / 2;
-
-	Cgame::GetInstance()->SetcamPos(cx, cy);
+	Cgame::GetInstance()->SetcamPos(mario_x, mario_y);
 
 }
 
@@ -222,6 +224,8 @@ void PlayScene::ParseSectionAnimationSets(string line) {
 
 void PlayScene::ParseSectionObjects(string line) {
 
+	if (this->quadtree == NULL) quadtree = new QuadTree(0, 0, 2815, 625,10);
+
 	vector<string> tokens = split(line);
 
 	if (tokens.size() < 3) return;
@@ -283,14 +287,13 @@ void PlayScene::ParseSectionObjects(string line) {
 
 	obj->setLocation(atof(tokens[1].c_str()), atof(tokens[2].c_str()));
 	obj->setAnimationSet(AnimationSets::GetInstance()->GetSet(atoi(tokens[3].c_str())));
-	GameObject.push_back(obj);
-
+	this->quadtree->Insert(obj);
 }
 
 void PlayScene::AddGameObject(LPGAMEOBJECT obj,float x,float y, int Animation_set) {
 	obj->setLocation(x, y);
 	obj->setAnimationSet(AnimationSets::GetInstance()->GetSet(Animation_set));
-	GameObject.push_back(obj);
+	this->quadtree->Insert(obj);
 }
 
 void PlayScene::clear() {}

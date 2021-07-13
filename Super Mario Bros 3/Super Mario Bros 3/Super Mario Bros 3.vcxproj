@@ -157,6 +157,7 @@
     <ClCompile Include="KeyEventHandler.cpp" />
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="QuestionMarkBrick.cpp" />
     <ClCompile Include="RacoonLeaf.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Mario.h" />
     <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="QuadTree.h" />
     <ClInclude Include="QuestionMarkBrick.h" />
     <ClInclude Include="RacoonLeaf.h" />
     <ClInclude Include="Scene.h" />

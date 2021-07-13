@@ -31,6 +31,9 @@
     <Filter Include="World Objects Headers Files\PowerUps Headers">
       <UniqueIdentifier>{e902fd74-5024-4cba-8cee-a5d4b4cb6dee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource header">
+      <UniqueIdentifier>{30441fb6-fe14-43d9-ab57-35e82529b960}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cgame.cpp">
@@ -99,30 +102,15 @@
     <ClCompile Include="Turtle.cpp">
       <Filter>World Objects Resources\Mobs Resources</Filter>
     </ClCompile>
+    <ClCompile Include="QuadTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cgame.h">
       <Filter>Source Headers Files</Filter>
     </ClInclude>
-    <ClInclude Include="KeyEventHandler.h">
-      <Filter>Source Headers Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>Source Headers Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Source Headers Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Source Headers Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Source Headers Files</Filter>
-    </ClInclude>
     <ClInclude Include="Mario.h">
-      <Filter>Source Headers Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
       <Filter>Source Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayScene.h">
@@ -163,6 +151,27 @@
     </ClInclude>
     <ClInclude Include="Turtle.h">
       <Filter>World Objects Headers Files\Mobs headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTree.h">
+      <Filter>Source Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Resource header</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Resource header</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Resource header</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Resource header</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Resource header</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyEventHandler.h">
+      <Filter>Resource header</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@
 #include <vector>
 #include "Mario.h"
 #include "Scene.h"
+#include "QuadTree.h"
 
 
 class PlayScene : public Scene 
@@ -12,7 +13,7 @@ protected:
 
 	Mario* Player;  //Main object of a scene
 
-	vector<LPGAMEOBJECT> GameObject; //All objects in the scene
+	QuadTree* quadtree; //All objects in the scene
 
 	void ParseSectionTexture(string line);
 	void ParseSectionSprites(string line);
