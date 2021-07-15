@@ -34,6 +34,12 @@
     <Filter Include="Resource header">
       <UniqueIdentifier>{30441fb6-fe14-43d9-ab57-35e82529b960}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World Objects Headers Files\Secret MileStones Headers">
+      <UniqueIdentifier>{ff862e2f-94a4-49a3-aec1-c5a6874a35a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Objects Resources\Secret Milestones">
+      <UniqueIdentifier>{e0bf66be-59fb-4826-8669-c74d487176d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cgame.cpp">
@@ -105,6 +111,12 @@
     <ClCompile Include="QuadTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PowerUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PMilestone.cpp">
+      <Filter>World Objects Resources\Secret Milestones</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cgame.h">
@@ -172,6 +184,12 @@
     </ClInclude>
     <ClInclude Include="KeyEventHandler.h">
       <Filter>Resource header</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerUp.h">
+      <Filter>Source Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PMilestone.h">
+      <Filter>World Objects Headers Files\Secret MileStones Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

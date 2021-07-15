@@ -13,7 +13,7 @@ protected:
 
 	Mario* Player;  //Main object of a scene
 
-	QuadTree* quadtree; //All objects in the scene
+	QuadTree* quadtree = NULL; //All objects in the scene
 
 	void ParseSectionTexture(string line);
 	void ParseSectionSprites(string line);

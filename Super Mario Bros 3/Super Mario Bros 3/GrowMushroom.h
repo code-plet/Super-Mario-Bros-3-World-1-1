@@ -1,5 +1,6 @@
 #pragma once
 #include "CGameObject.h"
+#include "PowerUp.h"
 
 #define GROWMUSHROOM_GRAVITY        0.001f
 #define GROWMUSHROOM_RISING_SPEED   0.01f
@@ -16,7 +17,7 @@
 #define GROWMUSHROOM_ANI 0
 
 class GrowMushroom :
-    public CGameObject
+    public PowerUp
 {
 protected:
     int  OG_y;

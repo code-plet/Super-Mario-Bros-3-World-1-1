@@ -141,19 +141,67 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 					if (ny != 0) { vy = 0; }
 
 					turtle->setPatrol(0);
-					vy = -MARIO_JUMP_DEFLECT_SPEED;
 
-					if (turtle->GetState() == TURTLE_STATE_ONFOOT)
-						turtle->setState(TURTLE_STATE_TURTLED);
-					else if (turtle->GetState() == TURTLE_STATE_WINGED)
+					// alternatives setstate algorithm 
+					/*if (turtle->GetState() == TURTLE_STATE_ONFOOT) { 
+						vy = -MARIO_JUMP_DEFLECT_SPEED;
+						turtle->setState(TURTLE_STATE_TURTLED); 
+					}
+					else if (turtle->GetState() == TURTLE_STATE_WINGED) {
+						vy = -MARIO_JUMP_DEFLECT_SPEED;
 						turtle->setState(TURTLE_STATE_ONFOOT);
+					}
+					else if (turtle->GetState() == TURTLE_STATE_SPINNING) {
+						vy = -MARIO_JUMP_DEFLECT_SPEED;
+						turtle->setState(TURTLE_STATE_TURTLED);
+					}
+					else if (turtle->GetState() == TURTLE_STATE_FLIPPED_SPINNING) {
+						vy = -MARIO_JUMP_DEFLECT_SPEED;
+						turtle->setState(TURTLE_STATE_FLIPPED);
+					}*/ 
+
+					switch (turtle->GetState()) {
+
+					case TURTLE_STATE_ONFOOT:
+						vy = -MARIO_JUMP_DEFLECT_SPEED;
+						turtle->setState(TURTLE_STATE_TURTLED);
+						break;
+
+					case TURTLE_STATE_WINGED:
+						vy = -MARIO_JUMP_DEFLECT_SPEED;
+						turtle->setState(TURTLE_STATE_ONFOOT);
+						break;
+
+					case TURTLE_STATE_SPINNING:
+						vy = -MARIO_JUMP_DEFLECT_SPEED;
+						turtle->setState(TURTLE_STATE_TURTLED);
+						break;
+
+					case TURTLE_STATE_FLIPPED_SPINNING:
+						vy = -MARIO_JUMP_DEFLECT_SPEED;
+						turtle->setState(TURTLE_STATE_FLIPPED);
+						break;
+
+					case TURTLE_STATE_FLIPPED:
+						turtle->setnx(this->nx);
+						turtle->setState(TURTLE_STATE_FLIPPED_SPINNING);
+
+					case TURTLE_STATE_TURTLED:
+						turtle->setnx(this->nx);
+						turtle->setState(TURTLE_STATE_SPINNING);
+
+					default:
+						break;
+					}
 				}
 				else if (e->nx != 0)
 				{
 					if(turtle->GetState() != TURTLE_STATE_TURTLED && turtle->GetState() != TURTLE_STATE_FLIPPED)
 					Reset();
 					else {
-				
+						turtle->setnx(this->nx);
+						if (turtle->GetState() == TURTLE_STATE_TURTLED) turtle->setState(TURTLE_STATE_SPINNING);
+						else turtle->setState(TURTLE_STATE_FLIPPED_SPINNING);
 					}
 				}
 			}

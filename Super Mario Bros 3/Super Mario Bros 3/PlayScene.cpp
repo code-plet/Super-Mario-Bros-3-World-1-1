@@ -18,6 +18,7 @@
 #include "VenusFireTrap.h"
 #include "RacoonLeaf.h"
 #include "Turtle.h"
+#include "PowerUp.h"
 
 #define MAX_GAME_LINE 1024
 
@@ -102,6 +103,56 @@ void PlayScene::Load() {
 
 void PlayScene::Update(DWORD dt) {
 
+	vector<LPGAMEOBJECT> UpdateObjects;
+	float mario_x, mario_y;
+	Player->GetLocation(mario_x, mario_y);
+
+	if (Player == NULL) return;
+
+	Cgame* game = Cgame::GetInstance();
+	mario_x -= game->GetScreenWidth() / 2;
+	mario_y -= game->GetScreenHeight() / 2;
+
+	rect camera{ mario_x - 400,mario_y-250,mario_x + game->GetScreenWidth() + 200, mario_y + game->GetScreenHeight() + 100 };
+
+	this->quadtree->Query(camera, &UpdateObjects);
+
+	DebugOut(L"Update %i objects, ", UpdateObjects.size());
+
+	vector<LPGAMEOBJECT> coObjects;
+
+	//for (int i = 1; i < RenderObjects.size(); i++) { // Delete "dead" objects and out of bound objects off the map
+	//	float x, y;
+	//	RenderObjects[i]->GetLocation(x, y);
+	//	if (RenderObjects[i]->GetState() == OBJECT_STATE_DIE || y > 450) RenderObjects.erase(RenderObjects.begin() + i);
+	//}
+
+	this->quadtree->DeleteDeadObjects(camera);
+
+	UpdateObjects.push_back(this->GetPlayer());
+
+	for (int i = 0; i < UpdateObjects.size() - 1; i++) coObjects.push_back(UpdateObjects[i] );  // List of colliable objects
+
+	for (int i = 0; i < UpdateObjects.size(); i++) UpdateObjects[i]->Update(dt,&coObjects); //Update object and detect collision.
+
+	Cgame::GetInstance()->SetcamPos(mario_x, mario_y);
+
+}
+
+void PlayScene::Unload() {
+
+	if (this->quadtree != NULL)this->quadtree->Delete();
+	this->quadtree = NULL;
+
+	Player = NULL;
+
+	DebugOut(L"[INFO] Scene %s unloaded! \n", SceneFilePath);
+
+}
+
+void PlayScene::Render() {
+	
+
 	vector<LPGAMEOBJECT> RenderObjects;
 	float mario_x, mario_y;
 	Player->GetLocation(mario_x, mario_y);
@@ -112,44 +163,47 @@ void PlayScene::Update(DWORD dt) {
 	mario_x -= game->GetScreenWidth() / 2;
 	mario_y -= game->GetScreenHeight() / 2;
 
-	rect camera { mario_x,mario_y,mario_x + game->GetScreenWidth(), mario_y + game->GetScreenHeight() };
+	/*rect camera{ mario_x,mario_y,mario_x + game->GetScreenWidth(), mario_y + game->GetScreenHeight() };*/
+	rect camera{ mario_x-400,mario_y-250,mario_x + game->GetScreenWidth() + 200, mario_y + game->GetScreenHeight() + 100 };
 
-	this->quadtree->Intersect(camera, &RenderObjects);
+	this->quadtree->Query(camera, &RenderObjects);
+	
+	DebugOut(L"Render %i objects\n", RenderObjects.size());
 
-	vector<LPGAMEOBJECT> coObjects = RenderObjects;
-
-	for (int i = 1; i < GameObject.size(); i++) { // Delete "dead" objects and out of bound objects off the map
-		float x, y;
-		GameObject[i]->GetLocation(x, y);
-		if (GameObject[i]->GetState() == OBJECT_STATE_DIE || y > 450) GameObject.erase(GameObject.begin() + i);   
-	}
-
-	for (int i = 0; i < GameObject.size() - 1; i++) coObjects.push_back(GameObject[i]);  // List of colliable objects
-
-	for (int i = 0; i < GameObject.size(); i++) GameObject[i]->Update(dt,&coObjects); //Update object and detect collision.
-
-	Cgame::GetInstance()->SetcamPos(mario_x, mario_y);
-
-}
-
-void PlayScene::Unload() {
-
-	for (int i = 0; i < GameObject.size(); i++)
-		delete GameObject[i];
-
-	GameObject.clear();
-	Player = NULL;
-
-	DebugOut(L"[INFO] Scene %s unloaded! \n", SceneFilePath);
-
-}
-
-void PlayScene::Render() {
+	LPGAMEOBJECT cam = new CollidableObstacle();
 	
 
-	for (int i = 0; i < GameObject.size(); i++) {
-		GameObject[i]->Render(); GameObject[i]->RenderBoundingBox();
+	for (int i = 0; i < RenderObjects.size(); i++) {
+		if (dynamic_cast<DecorativeObject*>(RenderObjects[i])) {
+			RenderObjects[i]->Render();
+			RenderObjects.erase(RenderObjects.begin() + i);
+			i--;
+		}
 	}
+
+	for (int i = 0; i < RenderObjects.size(); i++) {
+		if (dynamic_cast<PowerUp*>(RenderObjects[i])) {
+			RenderObjects[i]->Render();
+			RenderObjects.erase(RenderObjects.begin() + i);
+			i--;
+		}
+	}
+
+	for (int i = 0; i < RenderObjects.size(); i++) {
+		if (dynamic_cast<CollidableObstacle*>(RenderObjects[i])) {
+			RenderObjects[i]->Render();
+			RenderObjects.erase(RenderObjects.begin() + i);
+			i--;
+		}
+	}
+
+	RenderObjects.push_back(this->GetPlayer());
+
+	for (int i = 0; i < RenderObjects.size(); i++) {
+			RenderObjects[i]->Render();
+			RenderObjects[i]->RenderBoundingBox();
+	}
+
 
 }
 
@@ -244,6 +298,9 @@ void PlayScene::ParseSectionObjects(string line) {
 		else {
 			obj = new Mario();
 			Player =(Mario*) obj;
+			obj->setLocation(atof(tokens[1].c_str()), atof(tokens[2].c_str()));
+			obj->setAnimationSet(AnimationSets::GetInstance()->GetSet(atoi(tokens[3].c_str())));
+			return;
 		}
 		break;
 	case OBJECT_TYPE_BREAKABLE_BRICK:

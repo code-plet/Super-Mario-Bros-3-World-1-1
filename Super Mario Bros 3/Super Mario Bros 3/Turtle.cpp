@@ -1,5 +1,7 @@
 #include "Turtle.h"
 #include "CollidableObstacle.h"
+#include "BreakableBrick.h"
+#include "QuestionMarkBrick.h"
 
 Turtle::Turtle() {
 
@@ -73,8 +75,8 @@ void Turtle::Update(DWORD dt, vector <LPGAMEOBJECT>* coObjects) {
 			for (UINT i = 0; i < coEventsResult.size(); i++)
 			{
 				LPCOLLISIONEVENT e = coEventsResult[i];
-				if (dynamic_cast<CollidableObstacle*>(e->obj)) {
-					CollidableObstacle* CoObs = dynamic_cast<CollidableObstacle*>(e->obj);
+				if (dynamic_cast<QuestionMarkBrick*>(e->obj)) {
+					QuestionMarkBrick* CoObs = dynamic_cast<QuestionMarkBrick*>(e->obj);
 					y += min_ty * dy + ny * 0.4f;
 					if (ny != 0) { vy = 0; }
 
@@ -82,6 +84,33 @@ void Turtle::Update(DWORD dt, vector <LPGAMEOBJECT>* coObjects) {
 					if (nx != 0 && !CoObs->GetTopOnly()) {
 						this->nx = -nx;
 						vx = -vx;
+						CoObs->setState(QUESTION_MARK_STATE_DEPLOY);
+					}
+				}
+				else if (dynamic_cast<BreakableBrick*>(e->obj)) {
+					BreakableBrick* CoObs = dynamic_cast<BreakableBrick*>(e->obj);
+					y += min_ty * dy + ny * 0.4f;
+					if (ny != 0) { vy = 0; }
+
+					x += min_tx * dx + nx * 0.4f;
+					if (nx != 0 && CoObs->GetTopOnly()==false) {
+						this->nx = -nx;
+						vx = -vx;
+						CoObs->setState(BRICK_STATE_BROKEN);
+					}
+				}
+				else if (dynamic_cast<CollidableObstacle*>(e->obj)) {
+					CollidableObstacle* CoObs = dynamic_cast<CollidableObstacle*>(e->obj);
+					y += min_ty * dy + ny * 0.4f;
+					if (ny != 0) { vy = 0; }
+
+					x += min_tx * dx + nx * 0.4f;
+					if (nx != 0 && CoObs->GetTopOnly()==false) {
+						this->nx = -nx;
+						vx = -vx;
+					}
+					else {
+						x += dx;
 					}
 					if (x < 10) x = 10;
 					if (this->State == TURTLE_STATE_WINGED && vy == 0) vy = TURTLE_JUMP;
@@ -140,7 +169,6 @@ void Turtle::Render() {
 		}
 	}
 	Animation_Set->at(ani)->Render(x, y);
-	DebugOut(L"Turtle x= %f y= %f\n", this->x, this->y);
 }
 
 void Turtle::setState(int State) {

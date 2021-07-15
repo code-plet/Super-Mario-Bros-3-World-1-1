@@ -1,5 +1,6 @@
 #pragma once
 #include "CGameObject.h"
+#include "PowerUp.h"
 
 #define BONUSCOIN_STATE_SLEEP    10
 #define BONUSCOIN_STATE_RISING   11
@@ -11,7 +12,7 @@
 #define BONUSCOIN_ANI   0
 
 class BonusCoin :
-    public CGameObject
+    public PowerUp
 {
 protected:
     float OG_y;

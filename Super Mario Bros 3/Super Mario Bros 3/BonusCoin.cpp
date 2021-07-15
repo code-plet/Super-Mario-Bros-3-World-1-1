@@ -16,7 +16,7 @@ void BonusCoin::Update(DWORD dt, vector <LPGAMEOBJECT>* coObjects) {
 
 void BonusCoin::Render() {
 
-	if (this->State != BONUSCOIN_STATE_CONSUMED) Animation_Set->at(BONUSCOIN_ANI)->Render(x, y);
+	if (this->State == BONUSCOIN_STATE_RISING) Animation_Set->at(BONUSCOIN_ANI)->Render(x, y);
 }
 
 void BonusCoin::setState(int State) {

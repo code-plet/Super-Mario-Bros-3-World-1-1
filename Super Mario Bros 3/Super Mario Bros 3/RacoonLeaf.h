@@ -1,5 +1,6 @@
 #pragma once
 #include "CGameObject.h"
+#include "PowerUp.h"
 
 #define RACOONLEAF_GRAVITY        0.0005f
 #define RACOONLEAF_RISING_SPEED   0.2f
@@ -20,7 +21,7 @@
 #define RACOONLEAF_ANI_RIGHT     1
 
 class RacoonLeaf :
-    public CGameObject
+    public PowerUp
 {
 public:
     RacoonLeaf();
