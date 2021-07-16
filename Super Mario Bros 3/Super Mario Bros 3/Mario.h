@@ -3,7 +3,7 @@
 
 #define MARIO_JUMP_SPEED         0.4f
 #define MARIO_WALKING_SPEED      0.15f
-#define MARIO_SPRINTING_SPEED    0.25f
+#define MARIO_SPRINTING_SPEED    0.23f
 #define MARIO_GRAVITY            0.001f
 #define MARIO_FISSION            0.0002f
 #define MARIO_JUMP_DEFLECT_SPEED 0.2f
@@ -88,6 +88,7 @@ public:
     void setState(int State);
     void setLevel(int level);
 
+    int GetLevel() { return this->Level; }
     virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 
 };

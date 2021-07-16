@@ -2,9 +2,9 @@
 #include "CGameObject.h"
 
 #define TURTLE_WALKING_SPEED    0.03f
-#define TURTLE_GRAVITY  0.001f
+#define TURTLE_GRAVITY  0.005f
 #define TURTLE_JUMP     0.01f
-#define TURTLE_SPINNING_SPEED   0.3f
+#define TURTLE_SPINNING_SPEED   0.15f
 
 #define TURTLE_GREEN    0
 #define TURTLE_RED      1

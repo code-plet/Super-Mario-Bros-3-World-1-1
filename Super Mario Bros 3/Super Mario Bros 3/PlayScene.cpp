@@ -19,6 +19,10 @@
 #include "RacoonLeaf.h"
 #include "Turtle.h"
 #include "PowerUp.h"
+#include "ConsumableCoin.h"
+#include "Fireball.h"
+#include "PMilestone.h"
+
 
 #define MAX_GAME_LINE 1024
 
@@ -38,6 +42,8 @@
 #define OBJECT_TYPE_GROWMUSHROOM		10
 #define OBJECT_TYPE_BONUSCOIN			11
 #define OBJECT_TYPE_RACOONLEAF			12
+#define OBJECT_TYPE_CONSUMABLE_COIN		13 
+#define OBJECT_TYPE_P_MILESTONE			14 
 #define OBJECT_TYPE_CO_OBSTACLE			98
 #define OBJECT_TYPE_DECORATIVE_OBJECT	99
 
@@ -190,6 +196,15 @@ void PlayScene::Render() {
 	}
 
 	for (int i = 0; i < RenderObjects.size(); i++) {
+		if (dynamic_cast<VenusFireTrap*>(RenderObjects[i])) {
+			RenderObjects[i]->Render();
+			RenderObjects.erase(RenderObjects.begin() + i);
+			i--;
+			break;
+		}
+	}
+
+	for (int i = 0; i < RenderObjects.size(); i++) {
 		if (dynamic_cast<CollidableObstacle*>(RenderObjects[i])) {
 			RenderObjects[i]->Render();
 			RenderObjects.erase(RenderObjects.begin() + i);
@@ -311,7 +326,7 @@ void PlayScene::ParseSectionObjects(string line) {
 		obj = new Goomba();
 		break;
 	case OBJECT_TYPE_VENUS_FIRE_TRAP:
-		obj = new VenusFireTrap();
+		obj = new VenusFireTrap(atoi(tokens[4].c_str()));
 		break;
 	case OBJECT_TYPE_CO_OBSTACLE:
 		obj = new CollidableObstacle(atof(tokens[6].c_str()));
@@ -336,6 +351,12 @@ void PlayScene::ParseSectionObjects(string line) {
 	case OBJECT_TYPE_TURTLE:
 		if (atof(tokens[6].c_str())) obj = new Turtle(atoi(tokens[4].c_str()), atoi(tokens[5].c_str()), atof(tokens[7].c_str()), atof(tokens[8].c_str()), atof(tokens[9].c_str()), atof(tokens[10].c_str()));
 		else obj = new Turtle(atof(tokens[4].c_str()), atof(tokens[5].c_str()));
+		break;
+	case OBJECT_TYPE_CONSUMABLE_COIN:
+		obj = new ConsumableCoin();
+		break;
+	case OBJECT_TYPE_P_MILESTONE:
+		obj = new PMilestone();
 		break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", type);

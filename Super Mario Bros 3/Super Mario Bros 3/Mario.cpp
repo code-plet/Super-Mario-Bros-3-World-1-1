@@ -8,6 +8,8 @@
 #include "Fireball.h"
 #include "RacoonLeaf.h"
 #include "Turtle.h"
+#include "ConsumableCoin.h"
+#include "PMilestone.h"
 
 vector<LPCOLLISIONEVENT> coEvents;
 vector<LPCOLLISIONEVENT> coEventsResult;
@@ -79,6 +81,16 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 					Reset();
 				}
 			}
+			else if (dynamic_cast<PMilestone*>(e->obj)) {
+				PMilestone* obj = dynamic_cast<PMilestone*>(e->obj);
+				x += min_tx * dx + nx * 0.4f;
+				if (x < 10) x = 10;
+				if (nx != 0) vx = 0;
+				y += min_ty * dy + ny * 0.4f;
+				if (ny != 0) { vy = 0; }
+				if (ny > 0 && obj->GetState() == PMILESTONE_STATE_HIDDEN) obj->setState(PMILESTONE_STATE_UP);
+				if (ny < 0 && obj->GetState() == PMILESTONE_STATE_UP) obj->setState(PMILESTONE_STATE_PROVOKED);
+			}
 	 		else if (dynamic_cast<QuestionMarkBrick*>(e->obj)) {
 
 				//If collides beneath the brick, give item.
@@ -98,6 +110,10 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 					y += min_ty * dy + ny * 0.4f;
 					if (ny != 0) { vy = 0; }
 				}
+			}
+			else if (dynamic_cast<ConsumableCoin*>(e->obj)) {
+				ConsumableCoin* coin = dynamic_cast<ConsumableCoin*>(e->obj);
+				coin->setState(CONSUMABLE_COIN_STATE_CONSUMED);
 			}
 			else if (dynamic_cast<BreakableBrick*>(e->obj)) {
 				BreakableBrick* CoObs = dynamic_cast<BreakableBrick*>(e->obj);
@@ -406,14 +422,14 @@ void Mario::setState(int State){
 		break;
 	case MARIO_STATE_SPRINT_RIGHT:
 
-		if (vx <= MARIO_SPRINTING_SPEED) ax = MARIO_FISSION*1.5;
+		if (vx <= MARIO_SPRINTING_SPEED) ax = MARIO_FISSION;
 		else ax = 0;
 		nx = 1;
 		break;
 
 	case MARIO_STATE_SPRINT_LEFT:
 
-		if (vx >= -MARIO_SPRINTING_SPEED) ax = -MARIO_FISSION*1.5;
+		if (vx >= -MARIO_SPRINTING_SPEED) ax = -MARIO_FISSION;
 		else ax = 0;
 		nx = -1;
 		break;

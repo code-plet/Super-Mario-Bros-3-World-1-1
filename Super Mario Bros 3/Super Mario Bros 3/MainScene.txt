@@ -2,9 +2,11 @@
 [TEXTURES]
 0	textures\mario.png	255	255	255
 20	textures\misc.png	176	224	248
+25	textures\misc_2.png	255	255	255
 10	textures\enemies.png	3	26	110
 15	textures\enemies-2.png	0	128	128
 30	textures\World1.png	255	255	255
+
 -100	textures\bbox.png	255	255	255
 
 # id	left	top	right	bottom	texture_id
@@ -85,6 +87,7 @@
 #die
 30003	45	21	61	29	10
 #========VenusFireTrap==========
+#=Red-Firetrap=#
 #Look_Up_Right_Open
 30004	361	330	377	362	15
 #Look_Up_Left_Open
@@ -101,11 +104,30 @@
 30010	342	330	358	362	15
 #Look_Down_left_Closed
 30011	268	330	284	362	15
+
+#=Green-Firetrap=#
+#Look_Up_Right_Open
+30057	361	364	377	397	15
+#Look_Up_Left_Open
+30058	287	364	303	397	15
+#Look_Down_Right_Open
+30059	325	364	341	397	15
+#Look_Down_left_Open
+30060	251	364	267	397	15
+#Look_Up_Right_Closed
+30061	377	364	394	397	15
+#Look_Up_Left_Closed
+30062	304	364	320	397	15
+#Look_Down_Right_Closed
+30063	342	364	358	397	15
+#Look_Down_left_Closed
+30064	268	364	284	397	15
 #===FireBall===#
 30012	305	78	312	87	15
 30013	313	79	322	87	15
 30014	323	79	332	87	15
 30015	333	78	340	87	15
+
 #===========Turtle===========#
 #====Green Turtle=====#
 #winged_left
@@ -154,7 +176,7 @@
 30044	187	249	203	276	15
 30045	170	250	186	276	15
 #Turtled
-30046	239	174	155	190	15
+30046	239	174	255	190	15
 #Flipped
 30047	273	231	289	247	15
 #Spinning
@@ -241,6 +263,15 @@
 41402	300	208	315	221	20
 #flying right
 41403	284	244	299	257	20
+#World 1-1 P-milestone
+#Triggered
+41404	177	941	193	974	25
+41405	195	941	211	974	25
+41406	213	941	229	974	25
+#Hidden
+#(Breakable brick sprites)
+#Pressed
+41407	231	951	247	974	25
 #===============Decorative Object==========================
 #Tall_Bushes
 #First bush
@@ -353,6 +384,7 @@
 # die
 702	30003	100
 #======VenusFireTrap============#
+#=Red-Firetrap=#
 #Deploying_Down_Right
 703	30006	100	30010	100
 #Deploying_Down_Left
@@ -369,6 +401,25 @@
 709	30004	100
 #Fire_Up_Left
 710	30005	100
+
+#=Green-Firetrap=#
+#Deploying_Down_Right
+732	30059	100	30063	100
+#Deploying_Down_Left
+733	30060	100	30064	100
+#Deploying_Up_Right
+734	30057	100	30061	100
+#Deploying_Up_Left
+735	30058	100	30062	100
+#Fire_Down_Right
+736	30059	100
+#Fire_Down_Left
+737	30060	100
+#Fire_Up_Right
+738	30057	100
+#Fire_Up_Left
+739	30058	100
+
 #=====FireBall===#
 711	30012	100	30013	100	30014	100	30015	100
 #===========Turtle===========#
@@ -391,23 +442,29 @@
 719	30031	100	30030	100	30032	100
 #Spinning Flipped left
 720	30031	100	30032	100	30033	100
+#Spinning Flipped right
+721	30033	100	30032	100	30031	100
 #====Red Turtle=====#
 #winged_left
-721	30034	100	30035	100	30036	100	30037	100
+722	30034	100	30035	100	30036	100	30037	100
 #winged_right
-722	30038	100	30039	100	30040	100	30041	100
+723	30038	100	30039	100	30040	100	30041	100
 #Onfoot_left
-723	30042	100	30043	100
+724	30042	100	30043	100
 #Onfoot_right
-724	30044	100	30045	100
+725	30044	100	30045	100
 #Turtled
-725	30046	100
+726	30046	100
 #Flipped
-726	30047	100
-#Spinning
-727	30048	100	30049	100	30050	100
-#Spinning Flipped
-728	30031	100	30032	100	30033	100
+727	30047	100
+#Spinning left
+728	30048	100	30049	100	30050	100
+#Spinning right
+729	30050	100	30049	100	30048	100
+#Spinning Flipped left
+730	30031	100	30032	100	30033	100
+#Spinning Flipped left
+731	30033	100	30032	100	30031	100
 # ====WOODEN SQUARE TILE=========
 601	20001	100
 
@@ -465,6 +522,13 @@
 1402	41402	100
 #flying right
 1403	41403	100
+#World 1-1 P-milestone
+#Triggered
+1404	41404	100	41405	100	41406	100
+#hidden
+1405	41305	100	41304	100	41303	100	41302	100	41301	100
+#Switched
+1406	41407	100
 #===============Decorative Objects==============#
 #===Bushes=====#
 #First_Bush
@@ -560,8 +624,8 @@
 #Bonus coin 
 103	2107
 #Venus Fire Trap
-104	703	704	705	706	707	708	709	710
-#FireBall
+104	703	704	705	706	707	708	709	710	732	733	734	735	736	737	738	739
+#Fire ball
 105	711
 #Tiny_bush
 106	2108
@@ -578,7 +642,9 @@
 #three-headed cloud
 112	2111
 #Turtle
-113	712	713	714	715	716	717	718	719	720	721	722	723	724	725	726	727	728
+113	712	713	714	715	716	717	718	719	720	721	722	723	724	725	726	727	728	729	730	731
+#World 1-1 P-milestone
+114	1404	1405	1406
 #Ending Area
 199	2199
 [OBJECTS]
@@ -587,9 +653,7 @@
 
 # types: 0 = Mario; 1= Breakable Brick ; 2 = Goomba; 3 = Question Mark Brick; 4 = FireVenustrap; 5 = Turtle; 98 = Collidable Obstacle:[+ Height +Width]; 99 = Decorative Object;
 
-#		[QUESTION MARK BRICK 5th variable, types: 0 = none; 1 = coin; 2= GrowMushroom;]
-
-# Power-Up's types: 10 = Super-Mushroom; 11 = Bonus coin; 12= Racoon leaf;
+# Power-Up's types: 10 = Super-Mushroom; 11 = Bonus coin; 12= Racoon leaf; 13 = Consumable coins; 14 = P-Milestone world 1-1;
 
 #============WOODEN SQUARE TILE===============#
 #=====Area 3=======#
@@ -627,7 +691,6 @@
 1	2016.0	352.0	21	16	16	0
 1	2032.0	384.0	21	16	16	0
 1	2032.0	368.0	21	16	16	0
-1	2032.0	352.0	21	16	16	0
 1	2048.0	384.0	21	16	16	0
 1	2096.0	384.0	21	16	16	0
 1	2096.0	368.0	21	16	16	0
@@ -644,7 +707,7 @@
 #fifth
 98	1664.0	400.0	19	16	576	0
 #sixth
-98	2256.0	400.0	26	16	559	0
+98	2261.0	400.0	26	16	559	0
 #================Tunnels=======================#
 #=====Area 1=======#
 98	350.0	352.0	6	48	32	0
@@ -652,9 +715,9 @@
 98	1792.0	368.0	20	32	32	0
 98	1856.0	352.0	6	48	32	0
 #=====Area 5=======#
-98	2256.0	352.0	24	48	32	0
-98	2256.0	96.0	25	208	32	0
-98	2320.0	368.0	20	32	32	0
+98	2261.0	352.0	24	48	32	0
+98	2261.0	96.0	25	208	32	0
+98	2325.0	368.0	20	32	32	0
 #================Moutain Block Groups==========#
 #=====Area 1=======#
 #=first Group=
@@ -677,8 +740,10 @@
 #sky block 
 98	1312.0	128.0	27	32	64	1
 #========VenusFireTrap================#
+#(color 0: red; 1: green)
 #=====Area 1=======#
-4	357.0	360.0	104
+4	357.0	360.0	104	0
+4	1863.0	360.0	104	1
 #================Cloud Tile====================#
 98	1408	176.0	28	16	16	1
 98	1424	176.0	28	16	16	1
@@ -704,24 +769,39 @@
 #==========Turtle========================#
 #[Turtle +starting level(1 = On foot; 2 = winged), +color, +patrol(bool) +point A(x,y) (to patrol) +point B(x,y)]
 
-5	575.0	342.0	113	1	0	1	513.0	342.0	606	342.0
+5	575.0	342.0	113	1	0	1	513.0	342.0	606.0	342.0
 5	1370.0	297.0	113	2	0	0
+5	2100.0	342.0	113	1	1	1	2096.0	342.0	2106.0	342.0
 #====================================#
 # MARIO
 0	60.0	355.0	1
 #============Power-Ups \\P-Ups should have the same location as their containers. 
+#============Consumable coins===============#
+13	1073.0	304.0	61
+13	1105.0	272.0	61
+13	1137.0	240.0	61
+13	1169.0	208.0	61
+13	1201.0	176.0	61
+13	1329.0	64.0	61
+13	1345.0	64.0	61
+13	1361.0	64.0	61
 #coins
 11	160.0	330.0	103
 11	176.0	330.0	103
 11	210.0	282.0	103
-11	416.0	304.0	62
+11	416.0	304.0	103
 #=====area 2=======#
 11	704.0	336.0	103
 #Super Mushroom
 10	226.0	282.0	60
+10	656.0	368.0	60
+10	1472.0	352.0	60
 #Racoon leaf
+12	226.0	282.0	62
 12	656.0	368.0	62
 12	1472.0	352.0	62
+#World 1-1 P-Milestone
+14	2032.0	352.0	114
 #============Question Mark Bricks===============#
 #=====Area 1=======#
 3	160.0	330.0	0	16	16	0
@@ -733,7 +813,6 @@
 3	656.0	368.0	0	16	16	0
 3	704.0	336.0	0	16	16	0
 3	1472.0	352.0	0	16	16	0
-#============Consumable coins===============#
 #============Decorative Objects================#
 #First_Bush
 99	16	335.0	101
@@ -766,7 +845,7 @@
 #by_the_bricks
 99	1889.0	352.0	108
 #tall bush
-99	2368.0	272.0	109
+99	2373.0	272.0	109
 #======Clouds=======#
 #two-headed cloud
 99	120.0	257.0	110
@@ -779,7 +858,7 @@
 99	728.0	289.0	112
 99	1656.0	257.0	112
 #Ending Area 
-99	2480	31	199
+99	2485	31	199
 
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id

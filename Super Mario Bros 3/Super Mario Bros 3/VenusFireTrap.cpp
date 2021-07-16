@@ -4,8 +4,9 @@
 #include "PlayScene.h"
 #include "Fireball.h"
 
-VenusFireTrap::VenusFireTrap() {
+VenusFireTrap::VenusFireTrap(int color) {
 
+	this->color = color;
 	setState(VENUSFIRETRAP_STATE_SLEEP);
 
 }
@@ -70,27 +71,53 @@ void VenusFireTrap::Render()
 	int ani = -1;
 	float mario_x, mario_y;
 	Cgame::GetInstance()->GetCurrentScene()->GetPlayer()->GetLocation(mario_x, mario_y);
-	if (this->State == VENUSFIRETRAP_STATE_SLEEP || this->State == VENUSFIRETRAP_STATE_FIRE || this->State == VENUSFIRETRAP_STATE_FIRED) {
+	if (this->color == 0) {
+		if (this->State == VENUSFIRETRAP_STATE_SLEEP || this->State == VENUSFIRETRAP_STATE_FIRE || this->State == VENUSFIRETRAP_STATE_FIRED) {
 
-		if (mario_x > this->x) {
-			if (mario_y > this->y) ani = VENUSFIRETRAP_ANI_FIRE_DOWN_RIGHT;
-			else ani = VENUSFIRETRAP_ANI_FIRE_UP_RIGHT;
+			if (mario_x > this->x) {
+				if (mario_y > this->y) ani = VENUSFIRETRAP_ANI_RED_FIRE_DOWN_RIGHT;
+				else ani = VENUSFIRETRAP_ANI_RED_FIRE_UP_RIGHT;
+			}
+			else {
+				if (mario_y > this->y) ani = VENUSFIRETRAP_ANI_RED_FIRE_DOWN_LEFT;
+				else ani = VENUSFIRETRAP_ANI_RED_FIRE_UP_LEFT;
+			}
 		}
-		else {
-			if (mario_y > this->y) ani = VENUSFIRETRAP_ANI_FIRE_DOWN_LEFT;
-			else ani = VENUSFIRETRAP_ANI_FIRE_UP_LEFT;
+		else if (this->State == VENUSFIRETRAP_STATE_DEPLOY || this->State == VENUSFIRETRAP_STATE_HIDE) {
+			if (mario_x > this->x) {
+				if (mario_y > this->y) ani = VENUSFIRETRAP_ANI_RED_DEPLOYING_DOWN_RIGHT;
+				else ani = VENUSFIRETRAP_ANI_RED_DEPLOYING_UP_RIGHT;
+			}
+			else {
+				if (mario_y > this->y) ani = VENUSFIRETRAP_ANI_RED_DEPLOYING_DOWN_LEFT;
+				else ani = VENUSFIRETRAP_ANI_RED_DEPLOYING_UP_LEFT;
+			}
 		}
 	}
-	else if (this->State == VENUSFIRETRAP_STATE_DEPLOY || this->State == VENUSFIRETRAP_STATE_HIDE) {
-		if (mario_x > this->x) {
-			if (mario_y > this->y) ani = VENUSFIRETRAP_ANI_DEPLOYING_DOWN_RIGHT;
-			else ani = VENUSFIRETRAP_ANI_DEPLOYING_UP_RIGHT;
+	else {
+		if (this->State == VENUSFIRETRAP_STATE_SLEEP || this->State == VENUSFIRETRAP_STATE_FIRE || this->State == VENUSFIRETRAP_STATE_FIRED) {
+
+			if (mario_x > this->x) {
+				if (mario_y > this->y) ani = VENUSFIRETRAP_ANI_GREEN_FIRE_DOWN_RIGHT;
+				else ani = VENUSFIRETRAP_ANI_GREEN_FIRE_UP_RIGHT;
+			}
+			else {
+				if (mario_y > this->y) ani = VENUSFIRETRAP_ANI_GREEN_FIRE_DOWN_LEFT;
+				else ani = VENUSFIRETRAP_ANI_GREEN_FIRE_UP_LEFT;
+			}
 		}
-		else {
-			if (mario_y > this->y) ani = VENUSFIRETRAP_ANI_DEPLOYING_DOWN_LEFT;
-			else ani = VENUSFIRETRAP_ANI_DEPLOYING_UP_LEFT;
+		else if (this->State == VENUSFIRETRAP_STATE_DEPLOY || this->State == VENUSFIRETRAP_STATE_HIDE) {
+			if (mario_x > this->x) {
+				if (mario_y > this->y) ani = VENUSFIRETRAP_ANI_GREEN_DEPLOYING_DOWN_RIGHT;
+				else ani = VENUSFIRETRAP_ANI_GREEN_DEPLOYING_UP_RIGHT;
+			}
+			else {
+				if (mario_y > this->y) ani = VENUSFIRETRAP_ANI_GREEN_DEPLOYING_DOWN_LEFT;
+				else ani = VENUSFIRETRAP_ANI_GREEN_DEPLOYING_UP_LEFT;
+			}
 		}
 	}
+	
 
 	Animation_Set->at(ani)->Render(x, y);
 }

@@ -150,6 +150,7 @@
     <ClCompile Include="Cgame.cpp" />
     <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CollidableObstacle.cpp" />
+    <ClCompile Include="ConsumableCoin.cpp" />
     <ClCompile Include="DecorativeObject.cpp" />
     <ClCompile Include="Fireball.cpp" />
     <ClCompile Include="Goomba.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Cgame.h" />
     <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CollidableObstacle.h" />
+    <ClInclude Include="ConsumableCoin.h" />
     <ClInclude Include="DecorativeObject.h" />
     <ClInclude Include="Fireball.h" />
     <ClInclude Include="Goomba.h" />
