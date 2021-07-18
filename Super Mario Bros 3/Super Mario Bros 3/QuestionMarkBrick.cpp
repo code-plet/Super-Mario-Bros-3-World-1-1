@@ -6,6 +6,7 @@
  
 QuestionMarkBrick::QuestionMarkBrick() {
 
+	this->TopOnly = false;
 	this->State = QUESTION_MARK_STATE_ACTIVE;
 }
 

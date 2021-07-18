@@ -2,6 +2,8 @@
 #include "CollidableObstacle.h"
 #include "BreakableBrick.h"
 #include "QuestionMarkBrick.h"
+#include "Fireball.h"
+
 
 Turtle::Turtle() {
 
@@ -68,7 +70,6 @@ void Turtle::Update(DWORD dt, vector <LPGAMEOBJECT>* coObjects) {
 			// TODO: This is a very ugly designed function!!!!
 			FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
 
-
 			//
 			// Collision logic with other objects
 			//
@@ -99,19 +100,32 @@ void Turtle::Update(DWORD dt, vector <LPGAMEOBJECT>* coObjects) {
 						CoObs->setState(BRICK_STATE_BROKEN);
 					}
 				}
+				else if (dynamic_cast<Fireball*>(e->obj)) {
+					x = x;
+				}
 				else if (dynamic_cast<CollidableObstacle*>(e->obj)) {
 					CollidableObstacle* CoObs = dynamic_cast<CollidableObstacle*>(e->obj);
 					y += min_ty * dy + ny * 0.4f;
 					if (ny != 0) { vy = 0; }
 
 					x += min_tx * dx + nx * 0.4f;
-					if (nx != 0 && CoObs->GetTopOnly()==false) {
+					if (nx < 0 && CoObs->GetTopOnly()==false) {
+						DebugOut(L"changes direction to left\n");
+						this->nx = nx;
+						if (vx > 0)	vx = -vx;
+					}
+					else if (nx > 0 && CoObs->GetTopOnly() == false) {
+						float obs_x;
+						float obs_y;
+						CoObs->GetLocation(obs_x, obs_y);
+						DebugOut(L"changes direction to right\n");
+						DebugOut(L"Collides with x = %f, y = %f\n", obs_x, obs_y);
 						this->nx = -nx;
-						vx = -vx;
+						if (vx < 0)	vx = -vx;
 					}
-					else {
+					/*else {
 						x += dx;
-					}
+					}*/
 					if (x < 10) x = 10;
 					if (this->State == TURTLE_STATE_WINGED && vy == 0) vy = TURTLE_JUMP;
 				}

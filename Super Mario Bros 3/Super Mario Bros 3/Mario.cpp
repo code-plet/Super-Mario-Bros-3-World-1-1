@@ -132,16 +132,16 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 				coObs->setState(GROWMUSHROOM_STATE_CONSUMED);
 			}
 			else if (dynamic_cast<VenusFireTrap*>(e->obj)) {
+				if (this->Level == MARIO_LEVEL_RACOON) this->setLevel(MARIO_LEVEL_BIG);
 				if (this->Level == MARIO_LEVEL_BIG) this->setLevel(MARIO_LEVEL_SMALL);
 				else if (this->Level == MARIO_LEVEL_SMALL) this->Reset();
 			}
 			else if (dynamic_cast<RacoonLeaf*>(e->obj)) {
 				RacoonLeaf* coObs = dynamic_cast<RacoonLeaf*>(e->obj);
-				if (this->Level == MARIO_LEVEL_BIG) this->setLevel(MARIO_LEVEL_RACOON);
+				if (this->Level != MARIO_LEVEL_RACOON) this->setLevel(MARIO_LEVEL_RACOON);
 				coObs->setState(GROWMUSHROOM_STATE_CONSUMED);
 			}
 			else if (dynamic_cast<Fireball*>(e->obj)) {
-
 			}
 			else if (dynamic_cast<Turtle*>(e->obj)) {
 				Turtle* turtle = dynamic_cast<Turtle*>(e->obj);
@@ -218,6 +218,7 @@ void Mario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 						turtle->setnx(this->nx);
 						if (turtle->GetState() == TURTLE_STATE_TURTLED) turtle->setState(TURTLE_STATE_SPINNING);
 						else turtle->setState(TURTLE_STATE_FLIPPED_SPINNING);
+						this->State = MARIO_STATE_KICK;
 					}
 				}
 			}
@@ -257,7 +258,9 @@ void Mario::Render() {
 	int ani=-1;
 
 	if (Level == MARIO_LEVEL_BIG) {
-		if (State == MARIO_STATE_DIVE) if (nx == 1) ani = MARIO_ANI_BIG_DIVE_RIGHT;
+		if (State == MARIO_STATE_KICK) if (nx == 1) ani = MARIO_ANI_BIG_KICK_RIGHT;
+		else ani = MARIO_ANI_BIG_KICK_LEFT;
+		else if (State == MARIO_STATE_DIVE) if (nx == 1) ani = MARIO_ANI_BIG_DIVE_RIGHT;
 		else ani = MARIO_ANI_BIG_DIVE_LEFT;
 		else if (vy < 0 || vy> 0.017) if (nx == 1) ani = MARIO_ANI_BIG_JUMP_RIGHT;
 		else ani = MARIO_ANI_BIG_JUMP_LEFT;
@@ -271,7 +274,9 @@ void Mario::Render() {
 		else ani = MARIO_ANI_BIG_IDLE_LEFT;
 	}
 	else if (Level == MARIO_LEVEL_SMALL) {
-		if (vy < 0 || vy> 0.017) if (nx == 1) ani = MARIO_ANI_SMALL_JUMP_RIGHT;
+		if (State == MARIO_STATE_KICK) if (nx == 1) ani = MARIO_ANI_SMALL_KICK_RIGHT;
+		else ani = MARIO_ANI_SMALL_KICK_LEFT;
+		else if (vy < 0 || vy> 0.017) if (nx == 1) ani = MARIO_ANI_SMALL_JUMP_RIGHT;
 		else ani = MARIO_ANI_SMALL_JUMP_LEFT;
 		else if (vx > 0) if (nx == -1) ani = MARIO_ANI_SMALL_BRAKE_RIGHT;
 		else if (vx > MARIO_WALKING_SPEED + 0.5f) ani = MARIO_ANI_SMALL_SPRINT_RIGHT;
@@ -283,7 +288,11 @@ void Mario::Render() {
 		else ani = MARIO_ANI_SMALL_IDLE_LEFT;
 	}
 	else if (Level == MARIO_LEVEL_RACOON) {
-		if (State == MARIO_STATE_DIVE) if (nx == 1) ani = MARIO_ANI_RACOON_DIVE_RIGHT;
+		if (State == MARIO_STATE_KICK) if (nx == 1) ani = MARIO_ANI_RACOON_KICK_RIGHT;
+		else ani = MARIO_ANI_RACOON_KICK_LEFT;
+		else if (State == MARIO_STATE_FLOATTING) if (nx == 1) ani = MARIO_ANI_RACOON_TAIL_FLAPPING_RIGHT;
+		else ani = MARIO_ANI_RACOON_TAIL_FLAPPING_LEFT;
+		else if (State == MARIO_STATE_DIVE) if (nx == 1) ani = MARIO_ANI_RACOON_DIVE_RIGHT;
 		else ani = MARIO_ANI_RACOON_DIVE_LEFT;
 		else if (vy < 0 || vy> 0.017) if (nx == 1) ani = MARIO_ANI_RACOON_JUMP_RIGHT;
 		else ani = MARIO_ANI_RACOON_JUMP_LEFT;
@@ -362,53 +371,44 @@ void Mario::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 
 void Mario::setState(int State){
 
-	switch (State)
-	{
-	case MARIO_STATE_JUMP:
+		switch (State)
+		{
+		case MARIO_STATE_JUMP:
 
- 		if (vy >= 0 && vy< 0.017) vy = -MARIO_JUMP_SPEED;
-		break;
+			if (vy >= 0 && vy < 0.017) vy = -MARIO_JUMP_SPEED;
+			else if (this->Level == MARIO_LEVEL_RACOON) {
+			
+			}
+			break;
 
-	case MARIO_STATE_WALK_RIGHT:
+		case MARIO_STATE_WALK_RIGHT:
 
-		if (vx <= MARIO_WALKING_SPEED) ax = MARIO_FISSION;
-		else ax = 0;
-		nx = 1;
-		break;
+			if (vx <= MARIO_WALKING_SPEED) ax = MARIO_FISSION;
+			else ax = 0;
+			nx = 1;
+			break;
 
-	case MARIO_STATE_WALK_LEFT:
+		case MARIO_STATE_WALK_LEFT:
 
-		if (vx >= -MARIO_WALKING_SPEED) ax = -MARIO_FISSION;
-		else ax = 0;
-		nx = -1;
-		break;
+			if (vx >= -MARIO_WALKING_SPEED) ax = -MARIO_FISSION;
+			else ax = 0;
+			nx = -1;
+			break;
 
-	case MARIO_STATE_BREAK_RIGHT:
+		case MARIO_STATE_BREAK_RIGHT:
 
-		nx = 1;
-		ax = MARIO_FISSION * 2.4;
-		break;
+			nx = 1;
+			ax = MARIO_FISSION * 2.4;
+			break;
 
-	case MARIO_STATE_BREAK_LEFT:
+		case MARIO_STATE_BREAK_LEFT:
 
-		nx = -1;
-		ax = -MARIO_FISSION * 2.4;
-		break;
+			nx = -1;
+			ax = -MARIO_FISSION * 2.4;
+			break;
 
-	case MARIO_STATE_IDLE:
+		case MARIO_STATE_IDLE:
 
-		if (vx > 0) {
-			ax = -MARIO_FISSION;
-			if (vx < MARIO_FISSION * 1.5 * dt) { vx = 0; ax = 0; }
-		}			
-		if (vx < 0) {
-			ax = MARIO_FISSION;
-			if (vx > -MARIO_FISSION * 1.5 * dt) { vx = 0; ax = 0; }
-
-		}
-		break;
-	case MARIO_STATE_DIVE:
-		if (this->Level != MARIO_LEVEL_SMALL) {
 			if (vx > 0) {
 				ax = -MARIO_FISSION;
 				if (vx < MARIO_FISSION * 1.5 * dt) { vx = 0; ax = 0; }
@@ -416,30 +416,41 @@ void Mario::setState(int State){
 			if (vx < 0) {
 				ax = MARIO_FISSION;
 				if (vx > -MARIO_FISSION * 1.5 * dt) { vx = 0; ax = 0; }
+
 			}
+			break;
+		case MARIO_STATE_DIVE:
+			if (this->Level != MARIO_LEVEL_SMALL) {
+				if (vx > 0) {
+					ax = -MARIO_FISSION;
+					if (vx < MARIO_FISSION * 1.5 * dt) { vx = 0; ax = 0; }
+				}
+				if (vx < 0) {
+					ax = MARIO_FISSION;
+					if (vx > -MARIO_FISSION * 1.5 * dt) { vx = 0; ax = 0; }
+				}
+			}
+			else return;
+			break;
+		case MARIO_STATE_SPRINT_RIGHT:
+
+			if (vx <= MARIO_SPRINTING_SPEED) ax = MARIO_FISSION;
+			else ax = 0;
+			nx = 1;
+			break;
+
+		case MARIO_STATE_SPRINT_LEFT:
+
+			if (vx >= -MARIO_SPRINTING_SPEED) ax = -MARIO_FISSION;
+			else ax = 0;
+			nx = -1;
+			break;
+		default:
+
+			break;
 		}
-		else return;
-		break;
-	case MARIO_STATE_SPRINT_RIGHT:
 
-		if (vx <= MARIO_SPRINTING_SPEED) ax = MARIO_FISSION;
-		else ax = 0;
-		nx = 1;
-		break;
-
-	case MARIO_STATE_SPRINT_LEFT:
-
-		if (vx >= -MARIO_SPRINTING_SPEED) ax = -MARIO_FISSION;
-		else ax = 0;
-		nx = -1;
-		break;
-
-	default:
-
-		break;
-	}
-
-	CGameObject::setState(State);
+		CGameObject::setState(State);
 }
 
 void Mario::setLevel(int level) {
@@ -450,6 +461,6 @@ void Mario::setLevel(int level) {
 	}
 	else if (this->Level == MARIO_LEVEL_BIG && level == MARIO_LEVEL_RACOON) {
 		this->Level = MARIO_LEVEL_RACOON;
-		this->y += 1;
+		this->y -= 1;
 	}
 }

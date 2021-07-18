@@ -123,8 +123,6 @@ void PlayScene::Update(DWORD dt) {
 
 	this->quadtree->Query(camera, &UpdateObjects);
 
-	DebugOut(L"Update %i objects, ", UpdateObjects.size());
-
 	vector<LPGAMEOBJECT> coObjects;
 
 	//for (int i = 1; i < RenderObjects.size(); i++) { // Delete "dead" objects and out of bound objects off the map
@@ -173,17 +171,23 @@ void PlayScene::Render() {
 	rect camera{ mario_x-400,mario_y-250,mario_x + game->GetScreenWidth() + 200, mario_y + game->GetScreenHeight() + 100 };
 
 	this->quadtree->Query(camera, &RenderObjects);
-	
-	DebugOut(L"Render %i objects\n", RenderObjects.size());
-
-	LPGAMEOBJECT cam = new CollidableObstacle();
-	
 
 	for (int i = 0; i < RenderObjects.size(); i++) {
 		if (dynamic_cast<DecorativeObject*>(RenderObjects[i])) {
 			RenderObjects[i]->Render();
 			RenderObjects.erase(RenderObjects.begin() + i);
 			i--;
+		}
+	}
+
+	for (int i = 0; i < RenderObjects.size(); i++) {
+		if (dynamic_cast<CollidableObstacle*>(RenderObjects[i])) {
+			CollidableObstacle* obs = dynamic_cast<CollidableObstacle*>(RenderObjects[i]);
+			if (obs->GetTopOnly() == true) {
+				RenderObjects[i]->Render();
+				RenderObjects.erase(RenderObjects.begin() + i);
+				i--;
+			}
 		}
 	}
 
@@ -200,7 +204,6 @@ void PlayScene::Render() {
 			RenderObjects[i]->Render();
 			RenderObjects.erase(RenderObjects.begin() + i);
 			i--;
-			break;
 		}
 	}
 
@@ -378,7 +381,7 @@ void PlayScene::clear() {}
 
 void PlaySceneKeyHandler::OnKeyDown(int KeyCode) {
 
-	DebugOut(L"[INFO] KeyDown %d\n", KeyCode);
+	//DebugOut(L"[INFO] KeyDown %d\n", KeyCode);
 
 	Mario* mario = ((PlayScene*)Scene)->GetPlayer();
 	switch (KeyCode)

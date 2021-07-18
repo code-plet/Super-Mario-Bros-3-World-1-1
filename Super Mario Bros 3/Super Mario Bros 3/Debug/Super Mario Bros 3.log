@@ -1,40 +1,4 @@
-﻿  Cgame.cpp
-  Mario.cpp
+﻿  Mario.cpp
 C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PMilestone.h(19,1): warning C4005: 'COIN_ANI_SET': macro redefinition
 C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\QuestionMarkBrick.h(8): message : see previous definition of 'COIN_ANI_SET'
-  PlayScene.cpp
-  D:\important files\game dev\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\Cgame.h(8,1): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
-D:\important files\game dev\Include\dinput.h(42): message : see previous definition of 'DIRECTINPUT_VERSION'
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PMilestone.h(19,1): warning C4005: 'COIN_ANI_SET': macro redefinition
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\QuestionMarkBrick.h(8): message : see previous definition of 'COIN_ANI_SET'
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(140,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(142,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(182,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(190,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(198,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(207,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(217,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(265,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(284,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(316,50): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(316,25): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(323,52): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(323,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(333,52): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(333,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(340,52): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(340,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(352,178): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(352,153): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(352,128): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(352,103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(353,54): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(353,29): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(366,48): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\PlayScene.cpp(366,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  QuestionMarkBrick.cpp
-C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Super Mario Bros 3\QuestionMarkBrick.cpp(15,21): warning C4018: '<': signed/unsigned mismatch
-  VenusFireTrap.cpp
-  Generating Code...
   Super Mario Bros 3.vcxproj -> C:\Users\MSi\source\repos\Super-Mario-Bros-3-World-1-1\Super Mario Bros 3\Debug\Super Mario Bros 3.exe
